@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">CashBucket</string>
+
+    <!-- Hint -->
+    <string name="hint_username">username</string>
+    <string name="hint_password">password</string>
+    <string name="hint_name">personal name</string>
+
+    <!-- Button -->
+    <string name="button_signup">Sign up</string>
+    <string name="button_login">Login</string>
+    <string name="button_confirm">Confirm</string>
+
 </resources>

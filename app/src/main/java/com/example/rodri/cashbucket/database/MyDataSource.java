@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.rodri.cashbucket.model.AutoDeposit;
 import com.example.rodri.cashbucket.model.BankAccount;
+import com.example.rodri.cashbucket.model.Transaction;
 import com.example.rodri.cashbucket.model.User;
+import com.example.rodri.cashbucket.model.Wallet;
 
 /**
  * Created by rodri on 12/14/2016.
@@ -132,6 +134,73 @@ public class MyDataSource {
         return autoDeposit;
     }
 
+    public Wallet createWallet(double balance) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_BALANCE, balance);
+
+        long insertId = db.insert(MySQLiteHelper.TABLE_WALLET, null, values);
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_WALLET, walletColumns,
+                MySQLiteHelper.KEY_ID + " = " + insertId, null, null, null, null, null);
+
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return null;
+        }
+        cursor.moveToFirst();
+
+        Wallet newWallet = cursorToWallet(cursor);
+        cursor.close();
+        return newWallet;
+
+    }
+
+    public Transaction createTransaction(double price, long date, int type, long userId) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_PRICE, price);
+        values.put(MySQLiteHelper.COLUMN_DATE, date);
+        values.put(MySQLiteHelper.COLUMN_TYPE, type);
+        values.put(MySQLiteHelper.COLUMN_USER_ID, userId);
+
+        long insertId = db.insert(MySQLiteHelper.TABLE_TRANSACTION, null, values);
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_TRANSACTION, transactionColumns,
+                MySQLiteHelper.KEY_ID + " = " + insertId, null, null, null, null, null);
+
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return null;
+        }
+        cursor.moveToFirst();
+
+        Transaction newTransaction = cursorToTransaction(cursor);
+        cursor.close();
+
+        return newTransaction;
+    }
+
+    public boolean createUserBankAccount(long userId, long bankAccountId) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_USER_ID, userId);
+        values.put(MySQLiteHelper.COLUMN_BANK_ACCOUNT_ID, bankAccountId);
+
+        long insertId = db.insert(MySQLiteHelper.TABLE_USER_BANK_ACCOUNT, null, values);
+
+        if (insertId != 0) return true;
+        else return false;
+
+    }
+
+    public boolean createUserWallet(long userId, long walletId) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_USER_ID, userId);
+        values.put(MySQLiteHelper.COLUMN_WALLET_ID, walletId);
+
+        long insertId = db.insert(MySQLiteHelper.TABLE_USER_WALLET, null, values);
+
+        if (insertId != 0) return true;
+        else return false;
+
+    }
+
 
     /** ------------ CURSOR TO ---------------- */
 
@@ -158,6 +227,23 @@ public class MyDataSource {
         autoDeposit.setValue(cursor.getDouble(2));
         autoDeposit.setDay(cursor.getInt(3));
         return autoDeposit;
+    }
+
+    public Wallet cursorToWallet(Cursor cursor) {
+        Wallet wallet = new Wallet();
+        wallet.setId(cursor.getLong(0));
+        wallet.setBalance(cursor.getDouble(1));
+        return wallet;
+    }
+
+    public Transaction cursorToTransaction(Cursor cursor) {
+        Transaction transaction = new Transaction();
+        transaction.setId(cursor.getLong(0));
+        transaction.setPrice(cursor.getDouble(1));
+        transaction.setDate(cursor.getLong(2));
+        transaction.setType(cursor.getInt(3));
+        transaction.setUserId(cursor.getLong(4));
+        return transaction;
     }
 
     /** ------------ EXTRA ---------------- */

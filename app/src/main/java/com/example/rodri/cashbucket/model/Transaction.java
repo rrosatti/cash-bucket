@@ -9,7 +9,7 @@ public class Transaction {
     private long id;
     private double price;
     private long date;
-    private String type;
+    private int type;
     private long userId;
 
     public long getId() {
@@ -36,11 +36,11 @@ public class Transaction {
         this.price = price;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 
@@ -54,7 +54,7 @@ public class Transaction {
 
     public Transaction() {}
 
-    public Transaction(long id, double price, long date, String type, long userId) {
+    public Transaction(long id, double price, long date, int type, long userId) {
         this.id = id;
         this.price = price;
         this.date = date;
