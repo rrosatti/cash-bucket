@@ -26,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_password"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword"/>
 
         <Button
             android:id="@+id/activitySignup_btConfirm"
@@ -34,6 +35,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/button_confirm"
             android:layout_marginTop="20dp"/>
+
 
     </LinearLayout>
 

@@ -5,10 +5,26 @@
     <string name="hint_username">username</string>
     <string name="hint_password">password</string>
     <string name="hint_name">personal name</string>
+    <string name="hint_value">value</string>
+    <string name="hint_balance">balance</string>
+    <string name="hint_day">day</string>
 
     <!-- Button -->
     <string name="button_signup">Sign up</string>
     <string name="button_login">Login</string>
     <string name="button_confirm">Confirm</string>
+
+    <!-- Toast -->
+    <string name="toast_name_field_empty">The personal name field cannot be empty!</string>
+    <string name="toast_username_field_empty">The username field cannot be empty!</string>
+    <string name="toast_password_field_empty">The password field cannot be empty!</string>
+    <string name="toast_account_created_successfully">The account was created successfully!</string>
+    <string name="toast_something_went_wrong">Sorry, something went wrong!</string>
+
+    <!-- TextView -->
+    <string name="tView_bank_account">Bank Account</string>
+
+    <!-- Check Box -->
+    <string name="check_box_auto_deposit">Auto-deposit</string>
 
 </resources>

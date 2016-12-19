@@ -17,8 +17,9 @@
         </activity>
 
         <activity android:name=".activity.MainActivity" />
-
         <activity android:name=".activity.SignUpActivity" />
+        <activity android:name=".activity.CreateBankAccount"/>
+
     </application>
 
 </manifest>

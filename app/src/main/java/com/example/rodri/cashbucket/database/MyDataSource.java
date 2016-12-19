@@ -70,7 +70,7 @@ public class MyDataSource {
 
     /** ------------ CREATE ---------------- */
 
-    public User createUser(String name, String username, String password) {
+    public long createUser(String name, String username, String password) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_NAME, name);
         values.put(MySQLiteHelper.COLUMN_USERNAME, username);
@@ -82,17 +82,13 @@ public class MyDataSource {
 
         if (isCursorEmpty(cursor)) {
             cursor.close();
-            return null;
+            return 0;
         }
-        cursor.moveToFirst();
 
-        User newUser = cursorToUser(cursor);
-        cursor.close();
-
-        return newUser;
+        return insertId;
     }
 
-    public BankAccount createBankAccount(double balance) {
+    public long createBankAccount(double balance) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_BALANCE, balance);
 
@@ -102,17 +98,13 @@ public class MyDataSource {
 
         if (isCursorEmpty(cursor)) {
             cursor.close();
-            return null;
+            return 0;
         }
-        cursor.moveToFirst();
 
-        BankAccount newBankAccount = cursorToBankAccount(cursor);
-        cursor.close();
-
-        return newBankAccount;
+        return insertId;
     }
 
-    public AutoDeposit createAutoDeposit(long bankAccountId, double value, int day) {
+    public long createAutoDeposit(long bankAccountId, double value, int day) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_BANK_ACCOUNT_ID, bankAccountId);
         values.put(MySQLiteHelper.COLUMN_VALUE, value);
@@ -124,17 +116,13 @@ public class MyDataSource {
 
         if (isCursorEmpty(cursor)) {
             cursor.close();
-            return null;
+            return 0;
         }
-        cursor.moveToFirst();
 
-        AutoDeposit autoDeposit = cursorToAutoDeposit(cursor);
-        cursor.close();
-
-        return autoDeposit;
+        return insertId;
     }
 
-    public Wallet createWallet(double balance) {
+    public long createWallet(double balance) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_BALANCE, balance);
 
@@ -144,17 +132,14 @@ public class MyDataSource {
 
         if (isCursorEmpty(cursor)) {
             cursor.close();
-            return null;
+            return 0;
         }
-        cursor.moveToFirst();
 
-        Wallet newWallet = cursorToWallet(cursor);
-        cursor.close();
-        return newWallet;
+        return insertId;
 
     }
 
-    public Transaction createTransaction(double price, long date, int type, long userId) {
+    public long createTransaction(double price, long date, int type, long userId) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_PRICE, price);
         values.put(MySQLiteHelper.COLUMN_DATE, date);
@@ -167,14 +152,10 @@ public class MyDataSource {
 
         if (isCursorEmpty(cursor)) {
             cursor.close();
-            return null;
+            return 0;
         }
-        cursor.moveToFirst();
 
-        Transaction newTransaction = cursorToTransaction(cursor);
-        cursor.close();
-
-        return newTransaction;
+        return insertId;
     }
 
     public boolean createUserBankAccount(long userId, long bankAccountId) {
