@@ -9,10 +9,11 @@
         android:layout_centerInParent="true">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tView_bank_account"
-            android:textSize="14pt"/>
+            android:textSize="14pt"
+            android:textAlignment="center"/>
 
         <EditText
             android:id="@+id/activityCBAccount_etBalance"
@@ -40,7 +41,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_value"
                 android:inputType="number"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/activityCBAccount_etDay"
@@ -48,9 +50,17 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_day"
                 android:inputType="number"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:visibility="gone"/>
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/activityCBAccount_btConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_confirm"
+            android:layout_marginTop="30dp"/>
 
 
     </LinearLayout>

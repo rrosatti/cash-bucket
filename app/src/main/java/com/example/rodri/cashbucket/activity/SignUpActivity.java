@@ -48,10 +48,6 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, R.string.toast_password_field_empty, Toast.LENGTH_SHORT).show();
                 } else {
 
-                    Intent i = new Intent(SignUpActivity.this, CreateBankAccount.class);
-                    startActivity(i);
-
-                    /**
                     try {
                         dataSource.open();
 
@@ -61,9 +57,10 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(SignUpActivity.this, R.string.toast_account_created_successfully, Toast.LENGTH_SHORT)
                                     .show();
                             dataSource.close();
-                            Intent i = new Intent(SignUpActivity.this, CreateBankAccount.class);
+                            Intent i = new Intent(SignUpActivity.this, CreateBankAccountActivity.class);
                             i.putExtra("userId", userId);
                             startActivity(i);
+                            finish();
                         } else {
                             Toast.makeText(SignUpActivity.this, R.string.toast_something_went_wrong, Toast.LENGTH_SHORT).show();
                         }
@@ -71,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                         dataSource.close();
-                    }*/
+                    }
 
                 }
             }

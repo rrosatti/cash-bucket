@@ -20,6 +20,11 @@
     <string name="toast_password_field_empty">The password field cannot be empty!</string>
     <string name="toast_account_created_successfully">The account was created successfully!</string>
     <string name="toast_something_went_wrong">Sorry, something went wrong!</string>
+    <string name="toast_no_user_id">Something went wrong. There is no userId!!</string>
+    <string name="toast_balance_field_empty">The balance field cannot be empty!</string>
+    <string name="toast_value_field_empty">The value field cannot be empty!</string>
+    <string name="toast_day_field_empty">The day field cannot be empty!</string>
+    <string name="toast_bank_account_created_successfully">The bank account was created successfully!</string>
 
     <!-- TextView -->
     <string name="tView_bank_account">Bank Account</string>

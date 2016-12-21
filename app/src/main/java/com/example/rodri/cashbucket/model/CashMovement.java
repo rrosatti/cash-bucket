@@ -4,7 +4,7 @@ package com.example.rodri.cashbucket.model;
  * Created by rodri on 12/14/2016.
  */
 
-public class Transaction {
+public class CashMovement {
 
     private long id;
     private double price;
@@ -52,9 +52,9 @@ public class Transaction {
         this.userId = userId;
     }
 
-    public Transaction() {}
+    public CashMovement() {}
 
-    public Transaction(long id, double price, long date, int type, long userId) {
+    public CashMovement(long id, double price, long date, int type, long userId) {
         this.id = id;
         this.price = price;
         this.date = date;

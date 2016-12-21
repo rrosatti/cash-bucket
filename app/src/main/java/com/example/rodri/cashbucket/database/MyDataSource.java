@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.rodri.cashbucket.model.AutoDeposit;
 import com.example.rodri.cashbucket.model.BankAccount;
-import com.example.rodri.cashbucket.model.Transaction;
+import com.example.rodri.cashbucket.model.CashMovement;
 import com.example.rodri.cashbucket.model.User;
 import com.example.rodri.cashbucket.model.Wallet;
 
@@ -48,7 +48,7 @@ public class MyDataSource {
             MySQLiteHelper.COLUMN_USER_ID,
             MySQLiteHelper.COLUMN_WALLET_ID
     };
-    private String[] transactionColumns = {
+    private String[] cashMovementColumns = {
             MySQLiteHelper.KEY_ID,
             MySQLiteHelper.COLUMN_PRICE,
             MySQLiteHelper.COLUMN_DATE,
@@ -139,15 +139,15 @@ public class MyDataSource {
 
     }
 
-    public long createTransaction(double price, long date, int type, long userId) {
+    public long createCashMovement(double price, long date, int type, long userId) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_PRICE, price);
         values.put(MySQLiteHelper.COLUMN_DATE, date);
         values.put(MySQLiteHelper.COLUMN_TYPE, type);
         values.put(MySQLiteHelper.COLUMN_USER_ID, userId);
 
-        long insertId = db.insert(MySQLiteHelper.TABLE_TRANSACTION, null, values);
-        Cursor cursor = db.query(MySQLiteHelper.TABLE_TRANSACTION, transactionColumns,
+        long insertId = db.insert(MySQLiteHelper.TABLE_CASH_MOVEMENT, null, values);
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_CASH_MOVEMENT, cashMovementColumns,
                 MySQLiteHelper.KEY_ID + " = " + insertId, null, null, null, null, null);
 
         if (isCursorEmpty(cursor)) {
@@ -217,14 +217,14 @@ public class MyDataSource {
         return wallet;
     }
 
-    public Transaction cursorToTransaction(Cursor cursor) {
-        Transaction transaction = new Transaction();
-        transaction.setId(cursor.getLong(0));
-        transaction.setPrice(cursor.getDouble(1));
-        transaction.setDate(cursor.getLong(2));
-        transaction.setType(cursor.getInt(3));
-        transaction.setUserId(cursor.getLong(4));
-        return transaction;
+    public CashMovement cursorToCashMovement(Cursor cursor) {
+        CashMovement cashMovement = new CashMovement();
+        cashMovement.setId(cursor.getLong(0));
+        cashMovement.setPrice(cursor.getDouble(1));
+        cashMovement.setDate(cursor.getLong(2));
+        cashMovement.setType(cursor.getInt(3));
+        cashMovement.setUserId(cursor.getLong(4));
+        return cashMovement;
     }
 
     /** ------------ EXTRA ---------------- */
