@@ -227,6 +227,22 @@ public class MyDataSource {
         return cashMovement;
     }
 
+    /** ------------ GET DATA ---------------- */
+
+    public User getUser(String username, String password) {
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_USER, userColumns,
+                MySQLiteHelper.COLUMN_USERNAME + " = " + username + " AND " +
+                MySQLiteHelper.COLUMN_PASSWORD + " = " + password, null, null, null, null, null);
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return null;
+        }
+        cursor.moveToFirst();
+
+        User user = cursorToUser(cursor);
+        return user;
+    }
+
     /** ------------ EXTRA ---------------- */
 
     public boolean isCursorEmpty(Cursor cursor) {
