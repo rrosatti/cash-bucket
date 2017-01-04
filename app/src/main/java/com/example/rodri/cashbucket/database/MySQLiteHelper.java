@@ -50,10 +50,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     // User Wallet columns name { user_id }
     public static final String COLUMN_WALLET_ID = "wallet_id";
 
-    // Cash Movement columns name { id, user_id }
+    // Cash Movement columns name { id, user_id , day}
     public static final String COLUMN_PRICE = "price";
-    public static final String COLUMN_DATE = "date";
     public static final String COLUMN_TYPE = "type";
+    public static final String COLUMN_MONTH = "month";
+    public static final String COLUMN_YEAR = "year";
 
 
     /**  ----------- CREATING TABLES ----------- */
@@ -103,8 +104,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + TABLE_CASH_MOVEMENT + " ("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_PRICE + " REAL NOT NULL, "
-            + COLUMN_DATE + " INTEGER NOT NULL, "
             + COLUMN_TYPE + " INTEGER NOT NULL, "
+            + COLUMN_DAY + " INTEGER NOT NULL, "
+            + COLUMN_MONTH + " INTEGER NOT NULL, "
+            + COLUMN_YEAR + " INTEGER NOT NULL, "
             + COLUMN_USER_ID + " INTEGER NOT NULL, "
             + "FOREIGN KEY (" + COLUMN_USER_ID + ") REFERENCES " + TABLE_USER + " (" + KEY_ID + "));";
 

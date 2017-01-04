@@ -42,6 +42,7 @@ public class Login {
         this.username = username;
         this.password = password;
         this.context = context;
+        dataSource = new MyDataSource(context);
         try {
             dataSource.open();
 

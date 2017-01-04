@@ -8,9 +8,11 @@ public class CashMovement {
 
     private long id;
     private double price;
-    private long date;
     private int type;
     private long userId;
+    private int day;
+    private int month;
+    private int year;
 
     public long getId() {
         return id;
@@ -18,14 +20,6 @@ public class CashMovement {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getDate() {
-        return date;
-    }
-
-    public void setDate(long date) {
-        this.date = date;
     }
 
     public double getPrice() {
@@ -52,12 +46,35 @@ public class CashMovement {
         this.userId = userId;
     }
 
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
     public CashMovement() {}
 
-    public CashMovement(long id, double price, long date, int type, long userId) {
+    public CashMovement(long id, double price, int type, long userId) {
         this.id = id;
         this.price = price;
-        this.date = date;
         this.type = type;
         this.userId = userId;
     }

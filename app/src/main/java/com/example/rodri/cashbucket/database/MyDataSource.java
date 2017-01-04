@@ -51,8 +51,10 @@ public class MyDataSource {
     private String[] cashMovementColumns = {
             MySQLiteHelper.KEY_ID,
             MySQLiteHelper.COLUMN_PRICE,
-            MySQLiteHelper.COLUMN_DATE,
             MySQLiteHelper.COLUMN_TYPE,
+            MySQLiteHelper.COLUMN_DAY,
+            MySQLiteHelper.COLUMN_MONTH,
+            MySQLiteHelper.COLUMN_YEAR,
             MySQLiteHelper.COLUMN_USER_ID
     };
 
@@ -139,11 +141,13 @@ public class MyDataSource {
 
     }
 
-    public long createCashMovement(double price, long date, int type, long userId) {
+    public long createCashMovement(double price, int type, int day, int month, int year, long userId) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_PRICE, price);
-        values.put(MySQLiteHelper.COLUMN_DATE, date);
         values.put(MySQLiteHelper.COLUMN_TYPE, type);
+        values.put(MySQLiteHelper.COLUMN_DAY, day);
+        values.put(MySQLiteHelper.COLUMN_MONTH, month);
+        values.put(MySQLiteHelper.COLUMN_YEAR, year);
         values.put(MySQLiteHelper.COLUMN_USER_ID, userId);
 
         long insertId = db.insert(MySQLiteHelper.TABLE_CASH_MOVEMENT, null, values);
@@ -221,9 +225,11 @@ public class MyDataSource {
         CashMovement cashMovement = new CashMovement();
         cashMovement.setId(cursor.getLong(0));
         cashMovement.setPrice(cursor.getDouble(1));
-        cashMovement.setDate(cursor.getLong(2));
-        cashMovement.setType(cursor.getInt(3));
-        cashMovement.setUserId(cursor.getLong(4));
+        cashMovement.setType(cursor.getInt(2));
+        cashMovement.setDay(cursor.getInt(3));
+        cashMovement.setMonth(cursor.getInt(4));
+        cashMovement.setYear(cursor.getInt(5));
+        cashMovement.setUserId(cursor.getLong(6));
         return cashMovement;
     }
 
@@ -231,8 +237,11 @@ public class MyDataSource {
 
     public User getUser(String username, String password) {
         Cursor cursor = db.query(MySQLiteHelper.TABLE_USER, userColumns,
-                MySQLiteHelper.COLUMN_USERNAME + " = " + username + " AND " +
-                MySQLiteHelper.COLUMN_PASSWORD + " = " + password, null, null, null, null, null);
+                MySQLiteHelper.COLUMN_USERNAME + " = '" + username + "' AND " +
+                MySQLiteHelper.COLUMN_PASSWORD + " = '" + password + "'", null, null, null, null, null);
+        Cursor cursor2 = db.query(MySQLiteHelper.TABLE_USER, userColumns,
+                null, null, null, null, null, null);
+
         if (isCursorEmpty(cursor)) {
             cursor.close();
             return null;

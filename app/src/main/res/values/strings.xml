@@ -13,6 +13,8 @@
     <string name="button_signup">Sign up</string>
     <string name="button_login">Login</string>
     <string name="button_confirm">Confirm</string>
+    <string name="button_calendar">Calendar</string>
+    <string name="button_cancel">Cancel</string>
 
     <!-- Toast -->
     <string name="toast_name_field_empty">The personal name field cannot be empty!</string>
@@ -27,11 +29,19 @@
     <string name="toast_bank_account_created_successfully">The bank account was created successfully!</string>
     <string name="toast_login_failure">Username or password is invalid.</string>
     <string name="toast_login_success">Welcome!</string>
+    <string name="toast_date_field_empty">You have to set a date!</string>
 
     <!-- TextView -->
     <string name="tView_bank_account">Bank Account</string>
 
     <!-- Check Box -->
     <string name="check_box_auto_deposit">Auto-deposit</string>
+
+    <!-- Cash Movement Type -->
+    <string-array name="list_cash_movement_types">
+        <item>Withdrawal</item>
+        <item>Normal Expense</item>
+        <item>Credit Card Expense</item>
+    </string-array>
 
 </resources>
