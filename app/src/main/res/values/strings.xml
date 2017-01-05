@@ -41,7 +41,7 @@
     <string-array name="list_cash_movement_types">
         <item>Withdrawal</item>
         <item>Normal Expense</item>
-        <item>Credit Card Expense</item>
+        <item>Debit</item>
     </string-array>
 
 </resources>

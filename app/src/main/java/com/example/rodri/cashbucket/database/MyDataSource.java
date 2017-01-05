@@ -252,6 +252,57 @@ public class MyDataSource {
         return user;
     }
 
+
+    /** ------------ CASH MOVEMENT ACTIONS ---------------- */
+
+    public boolean withdrawal(long userId, double value) {
+        // I need to build something like "SQL Transaction"
+        BankAccount bankAccount = getBankAccount(userId);
+        Wallet wallet = getWallet(userId);
+
+        bankAccount.setBalance(bankAccount.getBalance()-value);
+        wallet.setBalance(wallet.getBalance()+value);
+
+        boolean updated1 = updateBankAccount(bankAccount);
+        boolean updated2 = updateWallet(wallet);
+
+        if (updated1 && updated2) {
+            return true;
+        } else {
+            System.out.println("Something went wrong!");
+            return false;
+        }
+
+    }
+
+    public boolean normalExpense(long userId, double value) {
+        // I need to build something like "SQL Transaction"
+        Wallet wallet = getWallet(userId);
+        wallet.setBalance(wallet.getBalance()-value);
+        boolean updated = updateWallet(wallet);
+
+        if (updated) {
+            return true;
+        } else {
+            System.out.println("Something went wrong!");
+            return false;
+        }
+    }
+
+    public boolean debit(long userId, double value) {
+        // I need to build here a "SQL Transaction"
+        BankAccount bankAccount = getBankAccount(userId);
+        bankAccount.setBalance(bankAccount.getBalance()-value);
+        boolean updated = updateBankAccount(bankAccount);
+
+        if (updated) {
+            return true;
+        } else {
+            System.out.println("Something went wrong!");
+            return false;
+        }
+    }
+
     /** ------------ EXTRA ---------------- */
 
     public boolean isCursorEmpty(Cursor cursor) {

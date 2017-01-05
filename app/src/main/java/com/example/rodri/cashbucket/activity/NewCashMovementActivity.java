@@ -106,6 +106,7 @@ public class NewCashMovementActivity extends AppCompatActivity {
             public void onClick(View v) {
                 double value = 0.0;
                 value = Double.parseDouble(etValue.getText().toString());
+                selectedType += 1;
 
                 if (value == 0) {
                     Toast.makeText(NewCashMovementActivity.this, R.string.toast_value_field_empty, Toast.LENGTH_SHORT).show();
@@ -118,11 +119,13 @@ public class NewCashMovementActivity extends AppCompatActivity {
                     try {
                         dataSource.open();
 
-                        long id = dataSource.createCashMovement(value, selectedType+1, day, month, year, userId);
+                        long id = dataSource.createCashMovement(value, selectedType, day, month, year, userId);
 
                         if (id != 0) {
                             // change bank account or wallet
+                            if (selectedType == 1 || selectedType == 3) {
 
+                            }
                             Toast.makeText(NewCashMovementActivity.this, "YEAY! " + selectedType, Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
