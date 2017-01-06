@@ -12,6 +12,9 @@ import com.example.rodri.cashbucket.model.CashMovement;
 import com.example.rodri.cashbucket.model.User;
 import com.example.rodri.cashbucket.model.Wallet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by rodri on 12/14/2016.
  */
@@ -224,7 +227,7 @@ public class MyDataSource {
     public CashMovement cursorToCashMovement(Cursor cursor) {
         CashMovement cashMovement = new CashMovement();
         cashMovement.setId(cursor.getLong(0));
-        cashMovement.setPrice(cursor.getDouble(1));
+        cashMovement.setValue(cursor.getDouble(1));
         cashMovement.setType(cursor.getInt(2));
         cashMovement.setDay(cursor.getInt(3));
         cashMovement.setMonth(cursor.getInt(4));
@@ -317,6 +320,27 @@ public class MyDataSource {
 
         return wallet;
 
+    }
+
+    public List<CashMovement> getAllCashMovements(long userId) {
+        List<CashMovement> cashMovements = new ArrayList<>();
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_CASH_MOVEMENT, cashMovementColumns,
+                MySQLiteHelper.COLUMN_USER_ID + " = " + userId, null, null, null, null, null);
+
+        if (isCursorEmpty(cursor)) {
+            System.out.println("getAllCashMovements()");
+            cursor.close();
+            return null;
+        }
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            cashMovements.add(cursorToCashMovement(cursor));
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return cashMovements;
     }
 
     /** ------------ UPDATE ---------------- */

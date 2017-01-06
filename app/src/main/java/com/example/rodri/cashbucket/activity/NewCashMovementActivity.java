@@ -123,8 +123,19 @@ public class NewCashMovementActivity extends AppCompatActivity {
 
                         if (id != 0) {
                             // change bank account or wallet
-                            if (selectedType == 1 || selectedType == 3) {
-
+                            switch (selectedType) {
+                                case 1: {
+                                    dataSource.withdrawal(userId, value);
+                                    break;
+                                }
+                                case 2: {
+                                    dataSource.normalExpense(userId, value);
+                                    break;
+                                }
+                                case 3: {
+                                    dataSource.debit(userId, value);
+                                    break;
+                                }
                             }
                             Toast.makeText(NewCashMovementActivity.this, "YEAY! " + selectedType, Toast.LENGTH_SHORT).show();
                             finish();

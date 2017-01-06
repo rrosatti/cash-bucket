@@ -7,7 +7,7 @@ package com.example.rodri.cashbucket.model;
 public class CashMovement {
 
     private long id;
-    private double price;
+    private double value;
     private int type;
     private long userId;
     private int day;
@@ -22,12 +22,12 @@ public class CashMovement {
         this.id = id;
     }
 
-    public double getPrice() {
-        return price;
+    public double getValue() {
+        return value;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setValue(double value) {
+        this.value = value;
     }
 
     public int getType() {
@@ -72,9 +72,9 @@ public class CashMovement {
 
     public CashMovement() {}
 
-    public CashMovement(long id, double price, int type, long userId) {
+    public CashMovement(long id, double value, int type, long userId) {
         this.id = id;
-        this.price = price;
+        this.value = value;
         this.type = type;
         this.userId = userId;
     }

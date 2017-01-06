@@ -44,4 +44,12 @@
         <item>Debit</item>
     </string-array>
 
+    <!-- CAsh Movement Images -->
+    <array name="cash_movement_images">
+        <item>@drawable/withdrawal</item>
+        <item>@drawable/normal_expense</item>
+        <item>@drawable/debit</item>
+        <item>@drawable/deposit</item>
+    </array>
+
 </resources>
