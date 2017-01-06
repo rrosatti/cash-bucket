@@ -252,6 +252,106 @@ public class MyDataSource {
         return user;
     }
 
+    public long getBankAccountId(long userId) {
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_USER_BANK_ACCOUNT, userBankAccountColumns,
+                MySQLiteHelper.COLUMN_USER_ID + " = " + userId, null, null, null, null, null);
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return -1;
+        }
+        cursor.moveToFirst();
+
+        long bankAccountId = cursor.getLong(1);
+        cursor.close();
+
+        return bankAccountId;
+
+    }
+
+    public long getWalletId(long userId) {
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_USER_WALLET, userWalletColumns,
+                MySQLiteHelper.COLUMN_USER_ID + " = " + userId, null, null, null, null, null);
+
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return -1;
+        }
+        cursor.moveToFirst();
+
+        long walletId = cursor.getLong(1);
+        cursor.close();
+
+        return walletId;
+    }
+
+    public BankAccount getBankAccount(long userId) {
+        long bankAccountId = getBankAccountId(userId);
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_BANK_ACCOUNT, bankAccountColumns,
+                MySQLiteHelper.KEY_ID + " = " + bankAccountId, null, null, null, null, null);
+
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return null;
+        }
+        cursor.moveToFirst();
+
+        BankAccount bankAccount = cursorToBankAccount(cursor);
+        cursor.close();
+
+        return bankAccount;
+    }
+
+    public Wallet getWallet(long userId) {
+        long walletId = getWalletId(userId);
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_WALLET, walletColumns,
+                MySQLiteHelper.KEY_ID + " = " + walletId, null, null, null, null, null);
+
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return null;
+        }
+        cursor.moveToFirst();
+
+        Wallet wallet = cursorToWallet(cursor);
+        cursor.close();
+
+        return wallet;
+
+    }
+
+    /** ------------ UPDATE ---------------- */
+
+    public boolean updateBankAccount(long bankAccountId, double balance) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_BALANCE, balance);
+
+        int rowsAffected = db.update(MySQLiteHelper.TABLE_BANK_ACCOUNT, values,
+                MySQLiteHelper.KEY_ID + " = " + bankAccountId, null);
+
+        if (rowsAffected == 0) {
+            System.out.println("Something went wrong!");
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean updateWallet(long walletId, double balance) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_BALANCE, balance);
+
+        int rowsAffected = db.update(MySQLiteHelper.TABLE_WALLET, values,
+                MySQLiteHelper.KEY_ID + " = " + walletId, null);
+
+        if (rowsAffected == 0) {
+            System.out.println("Something went wrong!");
+            return false;
+        }
+
+        return true;
+    }
+
+
 
     /** ------------ CASH MOVEMENT ACTIONS ---------------- */
 
@@ -263,8 +363,8 @@ public class MyDataSource {
         bankAccount.setBalance(bankAccount.getBalance()-value);
         wallet.setBalance(wallet.getBalance()+value);
 
-        boolean updated1 = updateBankAccount(bankAccount);
-        boolean updated2 = updateWallet(wallet);
+        boolean updated1 = updateBankAccount(bankAccount.getId(), bankAccount.getBalance());
+        boolean updated2 = updateWallet(wallet.getId(), wallet.getBalance());
 
         if (updated1 && updated2) {
             return true;
@@ -279,7 +379,7 @@ public class MyDataSource {
         // I need to build something like "SQL Transaction"
         Wallet wallet = getWallet(userId);
         wallet.setBalance(wallet.getBalance()-value);
-        boolean updated = updateWallet(wallet);
+        boolean updated = updateWallet(wallet.getId(), wallet.getBalance());
 
         if (updated) {
             return true;
@@ -293,7 +393,7 @@ public class MyDataSource {
         // I need to build here a "SQL Transaction"
         BankAccount bankAccount = getBankAccount(userId);
         bankAccount.setBalance(bankAccount.getBalance()-value);
-        boolean updated = updateBankAccount(bankAccount);
+        boolean updated = updateBankAccount(bankAccount.getId(), bankAccount.getBalance());
 
         if (updated) {
             return true;
