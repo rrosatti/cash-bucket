@@ -64,6 +64,14 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
         String sDay = String.valueOf(cashMovement.getDay());
         String sMonth = String.valueOf(cashMovement.getMonth());
         String sYear = String.valueOf(cashMovement.getYear());
+
+        if (cashMovement.getDay() < 10) {
+            sDay = "0" + sDay;
+        }
+        if (cashMovement.getMonth() < 10) {
+            sMonth = "0" + sMonth;
+        }
+
         String date = sDay+"/"+sMonth+"/"+sYear;
 
         String value = "R$ " + String.valueOf(cashMovement.getValue());

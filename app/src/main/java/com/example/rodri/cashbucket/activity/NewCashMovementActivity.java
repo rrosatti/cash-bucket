@@ -1,5 +1,6 @@
 package com.example.rodri.cashbucket.activity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -136,8 +137,13 @@ public class NewCashMovementActivity extends AppCompatActivity {
                                     dataSource.debit(userId, value);
                                     break;
                                 }
+                                case 4: {
+                                    dataSource.deposit(userId, value);
+                                    break;
+                                }
                             }
-                            Toast.makeText(NewCashMovementActivity.this, "YEAY! " + selectedType, Toast.LENGTH_SHORT).show();
+                            dataSource.close();
+                            setResult(Activity.RESULT_OK);
                             finish();
                         } else {
                             Toast.makeText(NewCashMovementActivity.this, R.string.toast_something_went_wrong,

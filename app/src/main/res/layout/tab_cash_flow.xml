@@ -4,10 +4,75 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <LinearLayout
+        android:id="@+id/tabCashFlow_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text_bank_account"
+                android:textSize="8pt"
+                android:layout_weight="3"/>
+
+            <TextView
+                android:id="@+id/tabCashFlow_etBankAccount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="8pt"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text_wallet"
+                android:textSize="8pt"
+                android:layout_weight="3"/>
+
+            <TextView
+                android:id="@+id/tabCashFlow_etWallet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="8pt"
+                android:layout_weight="1"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/tabCashFlow_viewDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@+id/tabCashFlow_container" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/tabCashFlow_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tabCashFlow_viewDivider"
+        android:layout_marginTop="5dp"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/tabCashFlow_btNewCashMovement"

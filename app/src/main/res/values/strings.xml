@@ -42,14 +42,19 @@
         <item>Withdrawal</item>
         <item>Normal Expense</item>
         <item>Debit</item>
+        <item>Deposit</item>
     </string-array>
 
-    <!-- CAsh Movement Images -->
+    <!-- Cash Movement Images -->
     <array name="cash_movement_images">
         <item>@drawable/withdrawal</item>
         <item>@drawable/normal_expense</item>
         <item>@drawable/debit</item>
         <item>@drawable/deposit</item>
     </array>
+
+    <!-- TextView -->
+    <string name="text_bank_account">Bank Account:</string>
+    <string name="text_wallet">Wallet: </string>
 
 </resources>
