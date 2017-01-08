@@ -24,7 +24,6 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
 
     private Activity activity;
     private List<CashMovement> cashMovements;
-    private Fragment fragment;
     private MyDataSource dataSource;
     private TypedArray images;
 

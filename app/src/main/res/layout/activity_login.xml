@@ -23,6 +23,14 @@
             android:inputType="textPassword"
             android:layout_marginTop="10dp"/>
 
+        <CheckBox
+            android:id="@+id/activityLogin_checkRememberMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/check_remember_me"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"/>
+
         <Button
             android:id="@+id/btLogin"
             android:layout_width="match_parent"
