@@ -8,6 +8,8 @@
     <string name="hint_value">value</string>
     <string name="hint_balance">balance</string>
     <string name="hint_day">day</string>
+    <string name="hint_desc">description</string>
+    <string name="hint_wallet_value">current amount of money</string>
 
     <!-- Button -->
     <string name="button_signup">Sign up</string>
@@ -30,9 +32,8 @@
     <string name="toast_login_failure">Username or password is invalid.</string>
     <string name="toast_login_success">Welcome!</string>
     <string name="toast_date_field_empty">You have to set a date!</string>
-
-    <!-- TextView -->
-    <string name="tView_bank_account">Bank Account</string>
+    <string name="toast_wallet_value_empty">You must enter a value!</string>
+    <string name="toast_wallet_created_successfully">The wallet was created successfully</string>
 
     <!-- Check Box -->
     <string name="check_box_auto_deposit">Auto-deposit</string>
@@ -56,6 +57,8 @@
     <!-- TextView -->
     <string name="text_bank_account">Bank Account:</string>
     <string name="text_wallet">Wallet: </string>
+    <string name="text_bank_account_title">Bank Account</string>
+    <string name="text_wallet_title">Wallet</string>
 
     <!-- CheckBox -->
     <string name="check_remember_me">Remember me</string>

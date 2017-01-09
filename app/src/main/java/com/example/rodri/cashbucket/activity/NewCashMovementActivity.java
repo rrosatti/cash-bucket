@@ -33,6 +33,7 @@ public class NewCashMovementActivity extends AppCompatActivity {
     private EditText etValue;
     private TextView txtDate;
     private Button btCalendar;
+    private EditText etDesc;
     private Button btConfirm;
     private Button btCancel;
     private Spinner spinnerTypes;
@@ -107,6 +108,7 @@ public class NewCashMovementActivity extends AppCompatActivity {
             public void onClick(View v) {
                 double value = 0.0;
                 value = Double.parseDouble(etValue.getText().toString());
+                String desc = etDesc.getText().toString();
                 selectedType += 1;
 
                 if (value == 0) {
@@ -120,7 +122,7 @@ public class NewCashMovementActivity extends AppCompatActivity {
                     try {
                         dataSource.open();
 
-                        long id = dataSource.createCashMovement(value, selectedType, day, month, year, userId);
+                        long id = dataSource.createCashMovement(value, selectedType, day, month, year, desc, userId);
 
                         if (id != 0) {
                             // change bank account or wallet
@@ -165,6 +167,7 @@ public class NewCashMovementActivity extends AppCompatActivity {
         etValue = (EditText) findViewById(R.id.activityNewCM_etValue);
         txtDate = (TextView) findViewById(R.id.activityNewCM_txtDate);
         btCalendar = (Button) findViewById(R.id.activityNewCM_btCalendar);
+        etDesc = (EditText) findViewById(R.id.activityNewCM_etDesc);
         btConfirm = (Button) findViewById(R.id.activityNewCM_btConfirm);
         btCancel = (Button) findViewById(R.id.activityNewCM_btCancel);
         spinnerTypes = (Spinner) findViewById(R.id.activityNewCM_spinType);

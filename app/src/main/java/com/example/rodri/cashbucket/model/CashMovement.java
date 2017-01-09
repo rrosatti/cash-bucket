@@ -13,6 +13,7 @@ public class CashMovement {
     private int day;
     private int month;
     private int year;
+    private String desc;
 
     public long getId() {
         return id;
@@ -70,12 +71,24 @@ public class CashMovement {
         this.year = year;
     }
 
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     public CashMovement() {}
 
-    public CashMovement(long id, double value, int type, long userId) {
+    public CashMovement(long id, double value, int type, int day, int month, int year, String desc, long userId) {
         this.id = id;
         this.value = value;
         this.type = type;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.desc = desc;
         this.userId = userId;
     }
 }

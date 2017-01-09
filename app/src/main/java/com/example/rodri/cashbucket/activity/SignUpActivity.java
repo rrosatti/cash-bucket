@@ -53,15 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                         long userId = dataSource.createUser(name, username, password);
 
-                        // If user was created successfully, then let's create Wallet and UserWallet
                         if (userId != 0) {
-                            long walletId = dataSource.createWallet(0.00);
-                            if (walletId != 0) {
-                                boolean userWallet = dataSource.createUserWallet(userId, walletId);
-                                if (!userWallet) {
-                                    Toast.makeText(SignUpActivity.this, R.string.toast_something_went_wrong, Toast.LENGTH_SHORT).show();
-                                }
-                            }
                             Toast.makeText(SignUpActivity.this, R.string.toast_account_created_successfully, Toast.LENGTH_SHORT)
                                     .show();
                             dataSource.close();

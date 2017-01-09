@@ -1,5 +1,6 @@
 package com.example.rodri.cashbucket.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -94,6 +95,9 @@ public class CreateBankAccountActivity extends AppCompatActivity {
                                         if (autoDepositId != 0) {
                                             Toast.makeText(CreateBankAccountActivity.this,
                                                     R.string.toast_bank_account_created_successfully, Toast.LENGTH_SHORT).show();
+                                            Intent i = new Intent(CreateBankAccountActivity.this, CreateWalletActivity.class);
+                                            i.putExtra("userId", userId);
+                                            startActivity(i);
                                             finish();
                                         } else {
                                             Toast.makeText(CreateBankAccountActivity.this,

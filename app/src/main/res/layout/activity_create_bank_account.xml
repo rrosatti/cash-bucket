@@ -11,7 +11,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tView_bank_account"
+            android:text="@string/text_bank_account_title"
             android:textSize="14pt"
             android:textAlignment="center"/>
 

@@ -31,6 +31,7 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
         public TextView displayValue;
         public ImageView displayIcon;
         public TextView displayDate;
+        public TextView displayDesc;
 
         public MyViewHolder(View v) {
             super(v);
@@ -38,6 +39,7 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
             displayValue = (TextView) v.findViewById(R.id.listItemCashMovement_txtValue);
             displayIcon = (ImageView) v.findViewById(R.id.listItemCashMovement_imgIcon);
             displayDate = (TextView) v.findViewById(R.id.listItemCashMovement_txtDate);
+            displayDesc = (TextView) v.findViewById(R.id.listItemCashMovement_txtDesc);
 
         }
     }
@@ -78,6 +80,7 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
         holder.displayValue.setText(value);
         holder.displayDate.setText(date);
         holder.displayIcon.setImageResource(images.getResourceId(cashMovement.getType()-1, -1));
+        holder.displayDesc.setText(cashMovement.getDesc());
     }
 
     @Override

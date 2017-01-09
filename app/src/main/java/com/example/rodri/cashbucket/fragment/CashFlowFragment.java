@@ -102,7 +102,10 @@ public class CashFlowFragment extends Fragment{
             dataSource.close();
         }
 
-        adapter = new CashMovementAdapter(getActivity(), cashMovements);
+        if (cashMovements != null) {
+            adapter = new CashMovementAdapter(getActivity(), cashMovements);
+        }
+
     }
 
     @Override

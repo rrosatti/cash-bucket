@@ -58,6 +58,7 @@ public class MyDataSource {
             MySQLiteHelper.COLUMN_DAY,
             MySQLiteHelper.COLUMN_MONTH,
             MySQLiteHelper.COLUMN_YEAR,
+            MySQLiteHelper.COLUMN_DESC,
             MySQLiteHelper.COLUMN_USER_ID
     };
 
@@ -144,13 +145,14 @@ public class MyDataSource {
 
     }
 
-    public long createCashMovement(double price, int type, int day, int month, int year, long userId) {
+    public long createCashMovement(double price, int type, int day, int month, int year, String desc, long userId) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_PRICE, price);
         values.put(MySQLiteHelper.COLUMN_TYPE, type);
         values.put(MySQLiteHelper.COLUMN_DAY, day);
         values.put(MySQLiteHelper.COLUMN_MONTH, month);
         values.put(MySQLiteHelper.COLUMN_YEAR, year);
+        values.put(MySQLiteHelper.COLUMN_DESC, desc);
         values.put(MySQLiteHelper.COLUMN_USER_ID, userId);
 
         long insertId = db.insert(MySQLiteHelper.TABLE_CASH_MOVEMENT, null, values);
@@ -232,7 +234,8 @@ public class MyDataSource {
         cashMovement.setDay(cursor.getInt(3));
         cashMovement.setMonth(cursor.getInt(4));
         cashMovement.setYear(cursor.getInt(5));
-        cashMovement.setUserId(cursor.getLong(6));
+        cashMovement.setDesc(cursor.getString(6));
+        cashMovement.setUserId(cursor.getLong(7));
         return cashMovement;
     }
 

@@ -55,6 +55,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_TYPE = "type";
     public static final String COLUMN_MONTH = "month";
     public static final String COLUMN_YEAR = "year";
+    public static final String COLUMN_DESC = "desc";
 
 
     /**  ----------- CREATING TABLES ----------- */
@@ -108,6 +109,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + COLUMN_DAY + " INTEGER NOT NULL, "
             + COLUMN_MONTH + " INTEGER NOT NULL, "
             + COLUMN_YEAR + " INTEGER NOT NULL, "
+            + COLUMN_DESC + " TEXT, "
             + COLUMN_USER_ID + " INTEGER NOT NULL, "
             + "FOREIGN KEY (" + COLUMN_USER_ID + ") REFERENCES " + TABLE_USER + " (" + KEY_ID + "));";
 

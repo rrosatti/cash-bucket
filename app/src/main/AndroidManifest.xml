@@ -20,6 +20,7 @@
         <activity android:name=".activity.SignUpActivity" />
         <activity android:name=".activity.CreateBankAccountActivity"/>
         <activity android:name=".activity.NewCashMovementActivity" />
+        <activity android:name=".activity.CreateWalletActivity" />
 
     </application>
 
