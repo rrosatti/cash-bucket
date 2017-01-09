@@ -21,6 +21,7 @@ import com.example.rodri.cashbucket.model.BankAccount;
 import com.example.rodri.cashbucket.model.CashMovement;
 import com.example.rodri.cashbucket.model.Login;
 import com.example.rodri.cashbucket.model.Wallet;
+import com.example.rodri.cashbucket.other.SimpleDividerItemDecorator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,9 @@ public class CashFlowFragment extends Fragment{
         View v = inflater.inflate(R.layout.tab_cash_flow, container, false);
 
         iniViews(v);
+
+        // Setting up the Divider decoration
+        listCashFlow.addItemDecoration(new SimpleDividerItemDecorator(getContext()));
 
         // setting a LayoutManager to the RecyclerList
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
