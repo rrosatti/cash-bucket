@@ -10,6 +10,7 @@ public class AutoDeposit {
     private long bankAccountId;
     private double value;
     private int day;
+    private boolean active;
 
     public long getId() {
         return id;
@@ -31,13 +32,22 @@ public class AutoDeposit {
         return value;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public AutoDeposit() {}
 
-    public AutoDeposit(long id, long bankAccountId, double value, int day) {
+    public AutoDeposit(long id, long bankAccountId, double value, int day, boolean active) {
         this.id = id;
         this.bankAccountId = bankAccountId;
         this.value = value;
         this.day = day;
+        this.active = active;
     }
 
     public void setValue(double value) {

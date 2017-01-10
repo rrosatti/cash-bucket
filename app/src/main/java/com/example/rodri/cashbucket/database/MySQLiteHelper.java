@@ -44,6 +44,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     // Auto Deposit columns name { id, bank_account_id }
     public static final String COLUMN_VALUE = "value";
     public static final String COLUMN_DAY = "day";
+    public static final String COLUMN_ACTIVE = "active";
 
     // Wallet columns name {id, balance }
 
@@ -86,6 +87,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + COLUMN_BANK_ACCOUNT_ID + " INTEGER NOT NULL, "
             + COLUMN_VALUE + " REAL NOT NULL, "
             + COLUMN_DAY + " INTEGER NOT NULL, "
+            + COLUMN_ACTIVE + " INTEGER NOT NULL, "
             + "FOREIGN KEY (" + COLUMN_BANK_ACCOUNT_ID + ") REFERENCES " + TABLE_BANK_ACCOUNT + " (" + KEY_ID + "));";
 
     private static final String CREATE_TABLE_WALLET =

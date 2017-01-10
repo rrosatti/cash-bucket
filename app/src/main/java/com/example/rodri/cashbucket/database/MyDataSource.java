@@ -41,7 +41,8 @@ public class MyDataSource {
             MySQLiteHelper.KEY_ID,
             MySQLiteHelper.COLUMN_BANK_ACCOUNT_ID,
             MySQLiteHelper.COLUMN_VALUE,
-            MySQLiteHelper.COLUMN_DAY
+            MySQLiteHelper.COLUMN_DAY,
+            MySQLiteHelper.COLUMN_ACTIVE
     };
     private String[] walletColumns = {
             MySQLiteHelper.KEY_ID,
@@ -115,6 +116,7 @@ public class MyDataSource {
         values.put(MySQLiteHelper.COLUMN_BANK_ACCOUNT_ID, bankAccountId);
         values.put(MySQLiteHelper.COLUMN_VALUE, value);
         values.put(MySQLiteHelper.COLUMN_DAY, day);
+        values.put(MySQLiteHelper.COLUMN_ACTIVE, 1);
 
         long insertId = db.insert(MySQLiteHelper.TABLE_AUTO_DEPOSIT, null, values);
         Cursor cursor = db.query(MySQLiteHelper.TABLE_AUTO_DEPOSIT, autoDepositColumns,
@@ -216,6 +218,11 @@ public class MyDataSource {
         autoDeposit.setBankAccountId(cursor.getLong(1));
         autoDeposit.setValue(cursor.getDouble(2));
         autoDeposit.setDay(cursor.getInt(3));
+        if (cursor.getInt(4) == 1) {
+            autoDeposit.setActive(true);
+        } else {
+            autoDeposit.setActive(false);
+        }
         return autoDeposit;
     }
 
