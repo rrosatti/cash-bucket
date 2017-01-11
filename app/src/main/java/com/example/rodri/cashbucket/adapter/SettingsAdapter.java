@@ -1,6 +1,7 @@
 package com.example.rodri.cashbucket.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.rodri.cashbucket.R;
+import com.example.rodri.cashbucket.activity.ManageBankAccountActivity;
 import com.example.rodri.cashbucket.database.MyDataSource;
 
 import java.util.List;
@@ -26,11 +28,31 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView displaySettingsOp;
+        public int settingsId;
 
         public MyViewHolder(View v) {
             super(v);
 
             displaySettingsOp = (TextView) v.findViewById(R.id.listItemSettings_txtSettingsOp);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (settingsId) {
+                        case 0: {
+                            break;
+                        }
+                        case 1: {
+                            Intent i = new Intent(activity, ManageBankAccountActivity.class);
+                            fragment.startActivity(i);
+                            break;
+                        }
+                        case 2: {
+                            break;
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -39,10 +61,6 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.MyView
         this.settingsOp = settingsOp;
         this.fragment = fragment;
         this.dataSource = new MyDataSource(activity);
-
-        for (int i=0; i<settingsOp.size(); i++) {
-            System.out.println(settingsOp.get(i));
-        }
     }
 
     @Override
@@ -57,6 +75,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.MyView
         String settings = settingsOp.get(position);
 
         holder.displaySettingsOp.setText(settings);
+        holder.settingsId = position;
     }
 
     @Override

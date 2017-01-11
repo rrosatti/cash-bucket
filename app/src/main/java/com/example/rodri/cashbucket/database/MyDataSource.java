@@ -353,6 +353,27 @@ public class MyDataSource {
         return cashMovements;
     }
 
+    public AutoDeposit getAutoDeposit(long bankAccountId) {
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_AUTO_DEPOSIT, autoDepositColumns,
+                MySQLiteHelper.COLUMN_BANK_ACCOUNT_ID + " = " + bankAccountId, null, null, null, null, null);
+
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return null;
+        }
+        cursor.moveToFirst();
+
+        AutoDeposit autoDeposit = cursorToAutoDeposit(cursor);
+        if (autoDeposit.isActive()) {
+            cursor.close();
+            return autoDeposit;
+        }
+
+        cursor.close();
+        return null;
+
+    }
+
     /** ------------ UPDATE ---------------- */
 
     public boolean updateBankAccount(long bankAccountId, double balance) {
