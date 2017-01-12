@@ -364,13 +364,13 @@ public class MyDataSource {
         cursor.moveToFirst();
 
         AutoDeposit autoDeposit = cursorToAutoDeposit(cursor);
-        if (autoDeposit.isActive()) {
+        /**if (autoDeposit.isActive()) {
             cursor.close();
             return autoDeposit;
-        }
+        }*/
 
         cursor.close();
-        return null;
+        return autoDeposit;
 
     }
 
@@ -404,6 +404,27 @@ public class MyDataSource {
         }
 
         return true;
+    }
+    public boolean updateAutoDeposit(AutoDeposit autoDeposit) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_VALUE, autoDeposit.getValue());
+        values.put(MySQLiteHelper.COLUMN_DAY, autoDeposit.getDay());
+        if (autoDeposit.isActive()) {
+            values.put(MySQLiteHelper.COLUMN_ACTIVE, 1);
+        } else {
+            values.put(MySQLiteHelper.COLUMN_ACTIVE, 0);
+        }
+
+        int rowsAffected = db.update(MySQLiteHelper.TABLE_AUTO_DEPOSIT, values,
+                MySQLiteHelper.KEY_ID + " = " + autoDeposit.getId(), null);
+
+        if (rowsAffected == 0) {
+            System.out.println("Something went wrong!");
+            return false;
+        }
+
+        return true;
+
     }
 
 

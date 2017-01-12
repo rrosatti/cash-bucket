@@ -59,6 +59,8 @@
     <string name="text_wallet">Wallet: </string>
     <string name="text_bank_account_title">Bank Account</string>
     <string name="text_wallet_title">Wallet</string>
+    <string name="text_balance">Balance</string>
+    <string name="text_day">Day</string>
 
     <!-- CheckBox -->
     <string name="check_remember_me">Remember me</string>
@@ -69,5 +71,10 @@
         <item>Bank Account Settings</item>
         <item>Wallet Settings</item>
     </string-array>
+
+    <!-- Dialog -->
+    <string name="dialog_deactivate_auto_deposit">Are you sure you want to deactivate the auto-deposit?</string>
+    <string name="dialog_negative_button">Cancel</string>
+    <string name="dialog_confirm_changes">Are you sure you want to apply the changes?</string>
 
 </resources>
