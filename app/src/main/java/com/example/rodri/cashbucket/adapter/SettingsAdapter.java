@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.activity.ManageBankAccountActivity;
+import com.example.rodri.cashbucket.activity.ManageWalletActivity;
 import com.example.rodri.cashbucket.database.MyDataSource;
 
 import java.util.List;
@@ -48,6 +49,8 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.MyView
                             break;
                         }
                         case 2: {
+                            Intent i = new Intent(activity, ManageWalletActivity.class);
+                            fragment.startActivity(i);
                             break;
                         }
                     }

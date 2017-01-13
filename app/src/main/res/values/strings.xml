@@ -34,6 +34,7 @@
     <string name="toast_date_field_empty">You have to set a date!</string>
     <string name="toast_wallet_value_empty">You must enter a value!</string>
     <string name="toast_wallet_created_successfully">The wallet was created successfully</string>
+    <string name="toast_no_changes_were_made">No changes were made.</string>
 
     <!-- Check Box -->
     <string name="check_box_auto_deposit">Auto-deposit</string>
@@ -61,6 +62,7 @@
     <string name="text_wallet_title">Wallet</string>
     <string name="text_balance">Balance</string>
     <string name="text_day">Day</string>
+    <string name="text_value">Value</string>
 
     <!-- CheckBox -->
     <string name="check_remember_me">Remember me</string>

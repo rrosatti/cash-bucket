@@ -64,11 +64,8 @@ public class CashFlowFragment extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        String sBankAccount = "R$ " + String.valueOf(bankAccount.getBalance());
-        String sWallet = "R$ " + String.valueOf(wallet.getBalance());
-
-        etBankAccount.setText(sBankAccount);
-        etWallet.setText(sWallet);
+        // it will update the Bank Account and Wallet balances
+        updateBalances();
 
         btNewCashMovement.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +109,14 @@ public class CashFlowFragment extends Fragment{
 
     }
 
+    private void updateBalances() {
+        String sBankAccount = "R$ " + String.valueOf(bankAccount.getBalance());
+        String sWallet = "R$ " + String.valueOf(wallet.getBalance());
+
+        etBankAccount.setText(sBankAccount);
+        etWallet.setText(sWallet);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
@@ -121,6 +126,7 @@ public class CashFlowFragment extends Fragment{
                     //adapter.notifyDataSetChanged();
                     getDataFromDatabase();
                     listCashFlow.setAdapter(adapter);
+                    updateBalances();
                 }
             }
         }
