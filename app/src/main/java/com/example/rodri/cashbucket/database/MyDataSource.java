@@ -285,6 +285,22 @@ public class MyDataSource {
         return user;
     }
 
+    public User getUser(long userId) {
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_USER, userColumns,
+                MySQLiteHelper.KEY_ID + " = " + userId, null, null, null, null, null);
+
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return null;
+        }
+        cursor.moveToFirst();
+
+        User user = cursorToUser(cursor);
+        cursor.close();
+
+        return user;
+    }
+
     public long getBankAccountId(long userId) {
         Cursor cursor = db.query(MySQLiteHelper.TABLE_USER_BANK_ACCOUNT, userBankAccountColumns,
                 MySQLiteHelper.COLUMN_USER_ID + " = " + userId, null, null, null, null, null);
