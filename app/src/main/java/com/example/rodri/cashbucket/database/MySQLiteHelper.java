@@ -25,6 +25,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String TABLE_WALLET = "wallet";
     public static final String TABLE_USER_WALLET = "user_wallet";
     public static final String TABLE_CASH_MOVEMENT = "cash_movement";
+    public static final String TABLE_AUTO_LOGIN = "auto_login";
 
     // Common column name
     public static final String KEY_ID = "id";
@@ -57,6 +58,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_MONTH = "month";
     public static final String COLUMN_YEAR = "year";
     public static final String COLUMN_DESC = "desc";
+
+    // Auto Login columns name { id, user_id, active }
 
 
     /**  ----------- CREATING TABLES ----------- */
@@ -115,6 +118,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + COLUMN_USER_ID + " INTEGER NOT NULL, "
             + "FOREIGN KEY (" + COLUMN_USER_ID + ") REFERENCES " + TABLE_USER + " (" + KEY_ID + "));";
 
+    private static final String CREATE_TABLE_AUTO_LOGIN =
+            "CREATE TABLE " + TABLE_AUTO_LOGIN + " ("
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + COLUMN_USER_ID + " INTEGER NOT NULL, "
+            + COLUMN_ACTIVE + " INTEGER NOT NULL, "
+            + "FOREIGN KEY (" + COLUMN_USER_ID + ") REFERENCES " + TABLE_USER + " (" + KEY_ID + "));";
+
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -128,6 +138,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_WALLET);
         db.execSQL(CREATE_TABLE_USER_WALLET);
         db.execSQL(CREATE_TABLE_CASH_MOVEMENT);
+        db.execSQL(CREATE_TABLE_AUTO_LOGIN);
     }
 
     @Override

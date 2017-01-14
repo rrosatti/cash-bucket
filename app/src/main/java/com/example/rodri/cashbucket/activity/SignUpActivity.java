@@ -56,6 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
                         if (userId != 0) {
                             Toast.makeText(SignUpActivity.this, R.string.toast_account_created_successfully, Toast.LENGTH_SHORT)
                                     .show();
+                            dataSource.createAutoLogin(userId);
                             dataSource.close();
                             Intent i = new Intent(SignUpActivity.this, CreateBankAccountActivity.class);
                             i.putExtra("userId", userId);

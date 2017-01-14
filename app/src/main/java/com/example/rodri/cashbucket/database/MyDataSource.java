@@ -63,6 +63,12 @@ public class MyDataSource {
             MySQLiteHelper.COLUMN_USER_ID
     };
 
+    private String[] autoLoginColumns = {
+            MySQLiteHelper.KEY_ID,
+            MySQLiteHelper.COLUMN_USER_ID,
+            MySQLiteHelper.COLUMN_ACTIVE
+    };
+
     public MyDataSource(Context context) {
         helper = new MySQLiteHelper(context);
     }
@@ -191,6 +197,20 @@ public class MyDataSource {
         if (insertId != 0) return true;
         else return false;
 
+    }
+
+    public boolean createAutoLogin(long userId) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_USER_ID, userId);
+        values.put(MySQLiteHelper.COLUMN_ACTIVE, 0);
+
+        long insertedId = db.insert(MySQLiteHelper.TABLE_AUTO_LOGIN, null, values);
+
+        if (insertedId != 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -427,6 +447,20 @@ public class MyDataSource {
 
     }
 
+    public boolean updateAutoLogin(long userId, int active) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_ACTIVE, active);
+
+        int rowsAffected = db.update(MySQLiteHelper.TABLE_AUTO_LOGIN, values,
+                MySQLiteHelper.COLUMN_USER_ID + " = " + userId, null);
+
+        if (rowsAffected == 0) {
+            System.out.println("Something went wrong!");
+            return false;
+        }
+
+        return true;
+    }
 
 
     /** ------------ CASH MOVEMENT ACTIONS ---------------- */
@@ -503,4 +537,22 @@ public class MyDataSource {
             return true;
         }
     }
+
+    public boolean isAutoLoginActive(long userId) {
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_AUTO_LOGIN, autoLoginColumns,
+                MySQLiteHelper.COLUMN_USER_ID + " = " + userId, null, null, null, null, null);
+
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return false;
+        }
+        int active = cursor.getInt(2);
+
+        if (active == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }
