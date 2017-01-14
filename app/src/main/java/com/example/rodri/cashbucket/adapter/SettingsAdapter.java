@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.rodri.cashbucket.R;
+import com.example.rodri.cashbucket.activity.ManageAccountActivity;
 import com.example.rodri.cashbucket.activity.ManageBankAccountActivity;
 import com.example.rodri.cashbucket.activity.ManageWalletActivity;
 import com.example.rodri.cashbucket.database.MyDataSource;
@@ -41,6 +42,8 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.MyView
                 public void onClick(View v) {
                     switch (settingsId) {
                         case 0: {
+                            Intent i = new Intent(activity, ManageAccountActivity.class);
+                            fragment.startActivity(i);
                             break;
                         }
                         case 1: {

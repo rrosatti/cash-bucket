@@ -36,9 +36,6 @@
     <string name="toast_wallet_created_successfully">The wallet was created successfully</string>
     <string name="toast_no_changes_were_made">No changes were made.</string>
 
-    <!-- Check Box -->
-    <string name="check_box_auto_deposit">Auto-deposit</string>
-
     <!-- Cash Movement Type -->
     <string-array name="list_cash_movement_types">
         <item>Withdrawal</item>
@@ -63,9 +60,13 @@
     <string name="text_balance">Balance</string>
     <string name="text_day">Day</string>
     <string name="text_value">Value</string>
+    <string name="text_account_title">Account</string>
+    <string name="text_user_settings">User Settings</string>
 
     <!-- CheckBox -->
+    <string name="check_auto_deposit">Auto-deposit</string>
     <string name="check_remember_me">Remember me</string>
+    <string name="check_auto_login">Auto login</string>
 
     <!-- Settings -->
     <string-array name="settings_options">

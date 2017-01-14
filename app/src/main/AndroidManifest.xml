@@ -23,6 +23,7 @@
         <activity android:name=".activity.CreateWalletActivity" />
         <activity android:name=".activity.ManageBankAccountActivity" />
         <activity android:name=".activity.ManageWalletActivity" />
+        <activity android:name=".activity.ManageAccountActivity" />
 
     </application>
 
