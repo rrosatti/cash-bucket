@@ -86,7 +86,7 @@ public class ManageAccountActivity extends AppCompatActivity {
                                     boolean userUpdated = dataSource.updateUser(user);
 
                                     dataSource.close();
-                                    
+
                                     if (autoLoginUpdated && userUpdated) {
                                         Toast.makeText(ManageAccountActivity.this, R.string.toast_changes_successful,
                                                 Toast.LENGTH_SHORT).show();
