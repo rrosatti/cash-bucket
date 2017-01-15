@@ -478,6 +478,23 @@ public class MyDataSource {
         return true;
     }
 
+    public boolean updateUser(User user) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_NAME, user.getName());
+        values.put(MySQLiteHelper.COLUMN_USERNAME, user.getUsername());
+        values.put(MySQLiteHelper.COLUMN_PASSWORD, user.getPassword());
+
+        int rowsAffected = db.update(MySQLiteHelper.TABLE_USER, values,
+                MySQLiteHelper.KEY_ID + " = " + user.getId(), null);
+
+        if (rowsAffected == 0) {
+            System.out.println("Something went wrong");
+            return false;
+        }
+
+        return true;
+    }
+
 
     /** ------------ CASH MOVEMENT ACTIONS ---------------- */
 

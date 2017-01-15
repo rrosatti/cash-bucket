@@ -35,6 +35,7 @@
     <string name="toast_wallet_value_empty">You must enter a value!</string>
     <string name="toast_wallet_created_successfully">The wallet was created successfully</string>
     <string name="toast_no_changes_were_made">No changes were made.</string>
+    <string name="toast_changes_successful">The changes were successful!</string>
 
     <!-- Cash Movement Type -->
     <string-array name="list_cash_movement_types">
