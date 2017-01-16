@@ -1,6 +1,8 @@
 package com.example.rodri.cashbucket.activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -23,6 +25,10 @@ import com.example.rodri.cashbucket.model.User;
 
 public class ManageAccountActivity extends AppCompatActivity {
 
+    private static final String MY_PREFERENCES = "com.example.rodri.cashbucket";
+    private static final String AUTO_LOGIN = "com.example.rodri.cashbucket.autologin";
+    private static final String USER_ID = "com.example.rodri.cashbucket.userid";
+
     private CheckBox checkAutoLogin;
     private EditText etName;
     private EditText etUsername;
@@ -32,6 +38,7 @@ public class ManageAccountActivity extends AppCompatActivity {
     private User user;
     private boolean currentChecked;
     private boolean newChecked;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +47,7 @@ public class ManageAccountActivity extends AppCompatActivity {
 
         iniViews();
         dataSource = new MyDataSource(this);
+        sharedPreferences = getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE);
         getDataFromDatabase();
 
         checkAutoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -59,50 +67,56 @@ public class ManageAccountActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // check whether the auto login was activated or not
-                        if (currentChecked != newChecked) {
-                            // check if the EditTexts are empty
-                            String sName = etName.getText().toString();
-                            String sUsername = etUsername.getText().toString();
-                            if (sName.isEmpty()) {
-                                Toast.makeText(ManageAccountActivity.this, R.string.toast_name_field_empty,
-                                        Toast.LENGTH_SHORT).show();
-                            } else if (sUsername.isEmpty()) {
-                                Toast.makeText(ManageAccountActivity.this, R.string.toast_username_field_empty,
-                                        Toast.LENGTH_SHORT).show();
-                            } else {
-                                // apply the changes
-                                user.setName(sName);
-                                user.setUsername(sUsername);
-                                try {
-                                    dataSource.open();
 
+                        // check if the EditTexts are empty
+                        String sName = etName.getText().toString();
+                        String sUsername = etUsername.getText().toString();
+                        if (sName.isEmpty()) {
+                            Toast.makeText(ManageAccountActivity.this, R.string.toast_name_field_empty,
+                                    Toast.LENGTH_SHORT).show();
+                        } else if (sUsername.isEmpty()) {
+                            Toast.makeText(ManageAccountActivity.this, R.string.toast_username_field_empty,
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            // apply the changes
+                            user.setName(sName);
+                            user.setUsername(sUsername);
+                            try {
+                                dataSource.open();
+
+                                // check whether the auto login was activated or not
+                                if (currentChecked != newChecked) {
                                     int active = 0;
                                     if (newChecked) {
                                         active = 1;
                                     }
 
-                                    boolean autoLoginUpdated = dataSource.updateAutoLogin(user.getId(), active);
-                                    boolean userUpdated = dataSource.updateUser(user);
-
-                                    dataSource.close();
-
-                                    if (autoLoginUpdated && userUpdated) {
-                                        Toast.makeText(ManageAccountActivity.this, R.string.toast_changes_successful,
-                                                Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    } else {
-                                        Toast.makeText(ManageAccountActivity.this, R.string.toast_something_went_wrong,
-                                                Toast.LENGTH_SHORT).show();
-                                        dialog.cancel();
-                                    }
-
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                    dataSource.close();
+                                    dataSource.updateAutoLogin(user.getId(), active);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putBoolean(AUTO_LOGIN, newChecked);
+                                    editor.apply();
                                 }
+
+                                boolean userUpdated = dataSource.updateUser(user);
+
+                                dataSource.close();
+
+                                if (userUpdated) {
+                                    Toast.makeText(ManageAccountActivity.this, R.string.toast_changes_successful,
+                                            Toast.LENGTH_SHORT).show();
+                                    finish();
+                                } else {
+                                    Toast.makeText(ManageAccountActivity.this, R.string.toast_something_went_wrong,
+                                            Toast.LENGTH_SHORT).show();
+                                    dialog.cancel();
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                dataSource.close();
                             }
                         }
+
                     }
                 });
 
