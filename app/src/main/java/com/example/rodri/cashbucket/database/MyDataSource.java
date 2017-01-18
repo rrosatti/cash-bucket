@@ -410,6 +410,41 @@ public class MyDataSource {
 
     }
 
+    public List<AutoDeposit> getAllActiveAutoDeposits() {
+        List<AutoDeposit> autoDeposits = new ArrayList<>();
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_AUTO_DEPOSIT, autoDepositColumns,
+                MySQLiteHelper.COLUMN_ACTIVE + " = " + 1, null, null, null, null, null);
+
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return null;
+        }
+        cursor.moveToFirst();
+
+        while (cursor.isAfterLast()) {
+            autoDeposits.add(cursorToAutoDeposit(cursor));
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return autoDeposits;
+    }
+
+    public long getUserId(long bankAccountId) {
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_USER_BANK_ACCOUNT, userBankAccountColumns,
+                MySQLiteHelper.COLUMN_BANK_ACCOUNT_ID + " = " + bankAccountId, null, null, null, null, null);
+
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return 0;
+        }
+
+        long userId = cursor.getLong(0);
+        cursor.close();
+
+        return userId;
+    }
+
     /** ------------ UPDATE ---------------- */
 
     public boolean updateBankAccount(long bankAccountId, double balance) {
@@ -587,5 +622,6 @@ public class MyDataSource {
             return true;
         }
     }
+
 
 }

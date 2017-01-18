@@ -94,6 +94,7 @@ public class ManageAccountActivity extends AppCompatActivity {
                                     dataSource.updateAutoLogin(user.getId(), active);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putBoolean(AUTO_LOGIN, newChecked);
+                                    editor.putLong(USER_ID, user.getId());
                                     editor.apply();
                                 }
 
