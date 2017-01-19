@@ -1,5 +1,6 @@
 package com.example.rodri.cashbucket.activity;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.adapter.ViewPagerAdapter;
+import com.example.rodri.cashbucket.service.AutoDepositService;
 import com.example.rodri.cashbucket.tabs.SlidingTabLayout;
 
 public class MainActivity extends AppCompatActivity {

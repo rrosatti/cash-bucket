@@ -69,6 +69,13 @@ public class MyDataSource {
             MySQLiteHelper.COLUMN_ACTIVE
     };
 
+    private String[] autoDepositLogColumns = {
+            MySQLiteHelper.KEY_ID,
+            MySQLiteHelper.COLUMN_AUTO_DEPOSIT_ID,
+            MySQLiteHelper.COLUMN_VALUE,
+            MySQLiteHelper.COLUMN_DATE_IN_MILLIS
+    };
+
     public MyDataSource(Context context) {
         helper = new MySQLiteHelper(context);
     }
@@ -211,6 +218,24 @@ public class MyDataSource {
         } else {
             return false;
         }
+    }
+
+    public boolean createAutoDepositLog(long autoDepositId, double value, long dateInMillis) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_AUTO_DEPOSIT_ID, autoDepositId);
+        values.put(MySQLiteHelper.COLUMN_VALUE, value);
+        values.put(MySQLiteHelper.COLUMN_DATE_IN_MILLIS, dateInMillis);
+
+        long insertedId = db.insert(MySQLiteHelper.TABLE_AUTO_DEPOSIT_LOG, null, values);
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_AUTO_DEPOSIT_LOG, autoDepositLogColumns,
+                MySQLiteHelper.KEY_ID + " = " + insertedId, null, null, null, null, null);
+
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return false;
+        }
+
+        return true;
     }
 
 
@@ -417,11 +442,12 @@ public class MyDataSource {
 
         if (isCursorEmpty(cursor)) {
             cursor.close();
+            System.out.println("getAllActiveAutoDeposits()!");
             return null;
         }
         cursor.moveToFirst();
 
-        while (cursor.isAfterLast()) {
+        while (!cursor.isAfterLast()) {
             autoDeposits.add(cursorToAutoDeposit(cursor));
             cursor.moveToNext();
         }
@@ -443,6 +469,24 @@ public class MyDataSource {
         cursor.close();
 
         return userId;
+    }
+
+    public long getDataOfLastDeposit(long autoDepositId) {
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_AUTO_DEPOSIT_LOG, autoDepositLogColumns,
+                MySQLiteHelper.COLUMN_AUTO_DEPOSIT_ID + " = " + autoDepositId, null, null, null, null, null);
+
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return 0;
+        }
+        // last or first??
+        cursor.moveToLast();
+
+        long dateInMillis = cursor.getLong(3);
+        cursor.close();
+
+        return dateInMillis;
+
     }
 
     /** ------------ UPDATE ---------------- */
@@ -599,9 +643,9 @@ public class MyDataSource {
 
     public boolean isCursorEmpty(Cursor cursor) {
         if (cursor.moveToFirst()) {
-            System.out.println("The cursor is empty!!");
             return false;
         }else {
+            System.out.println("The cursor is empty!!");
             return true;
         }
     }

@@ -27,6 +27,8 @@
         <activity android:name=".activity.ManageBankAccountActivity" android:theme="@style/AppTheme2" />
         <activity android:name=".activity.ManageWalletActivity" android:theme="@style/AppTheme2" />
         <activity android:name=".activity.ManageAccountActivity" android:theme="@style/AppTheme2" />
+
+        <service android:name=".service.AutoDepositService" />
         
         <receiver android:name=".receiver.BootBroadcastReceiver">
             <intent-filter>

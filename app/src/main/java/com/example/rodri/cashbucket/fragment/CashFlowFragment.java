@@ -58,6 +58,7 @@ public class CashFlowFragment extends Fragment{
 
         listCashFlow.setAdapter(adapter);
 
+
         return v;
     }
 
@@ -105,6 +106,9 @@ public class CashFlowFragment extends Fragment{
 
         if (cashMovements != null) {
             adapter = new CashMovementAdapter(getActivity(), cashMovements);
+        } else {
+            cashMovements = new ArrayList<>();
+            adapter = new CashMovementAdapter(getActivity(), cashMovements);
         }
 
     }
@@ -116,6 +120,7 @@ public class CashFlowFragment extends Fragment{
         etBankAccount.setText(sBankAccount);
         etWallet.setText(sWallet);
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

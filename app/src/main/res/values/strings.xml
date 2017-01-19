@@ -81,4 +81,7 @@
     <string name="dialog_negative_button">Cancel</string>
     <string name="dialog_confirm_changes">Are you sure you want to apply the changes?</string>
 
+    <!-- Notification -->
+    <string name="notification_new_deposit">New Deposit</string>
+
 </resources>

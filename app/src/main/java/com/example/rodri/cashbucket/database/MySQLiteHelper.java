@@ -64,6 +64,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     // Auto Deposit Log { id, auto_deposit_id, value }
     public static final String COLUMN_AUTO_DEPOSIT_ID = "auto_deposit_id";
+    public static final String COLUMN_DATE_IN_MILLIS = "date_in_millis";
 
 
     /**  ----------- CREATING TABLES ----------- */
@@ -134,6 +135,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_AUTO_DEPOSIT_ID + " INTEGER NOT NULL, "
             + COLUMN_VALUE + " REAL NOT NULL, "
+            + COLUMN_DATE_IN_MILLIS + " INTEGER NOT NULL, "
             + "FOREIGN KEY (" + COLUMN_AUTO_DEPOSIT_ID + ") REFERENCES " + TABLE_AUTO_DEPOSIT + " (" + KEY_ID + "));";
 
     public MySQLiteHelper(Context context) {

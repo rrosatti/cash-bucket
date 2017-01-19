@@ -1,6 +1,8 @@
 package com.example.rodri.cashbucket.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,9 @@ import com.example.rodri.cashbucket.database.MyDataSource;
 
 public class CreateBankAccountActivity extends AppCompatActivity {
 
+    private static final String MY_PREFERENCES = "com.example.rodri.cashbucket";
+    private static final String NOTIFY = "com.example.rodri.cashbucket.notify";
+
     private EditText etBalance;
     private EditText etValue;
     private EditText etDay;
@@ -28,7 +33,7 @@ public class CreateBankAccountActivity extends AppCompatActivity {
     private MyDataSource dataSource;
     private boolean checked = false;
     private long userId = -1;
-
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +42,7 @@ public class CreateBankAccountActivity extends AppCompatActivity {
 
         dataSource = new MyDataSource(this);
         iniViews();
+        sharedPreferences = getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE);
 
         try {
             userId = getIntent().getExtras().getLong("userId");
@@ -93,6 +99,11 @@ public class CreateBankAccountActivity extends AppCompatActivity {
                                     if (userBankAccount) {
                                         long autoDepositId = dataSource.createAutoDeposit(bankAccountId, value, day);
                                         if (autoDepositId != 0) {
+                                            // set auto deposit notification as default
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putBoolean(NOTIFY, true);
+                                            editor.apply();
+
                                             Toast.makeText(CreateBankAccountActivity.this,
                                                     R.string.toast_bank_account_created_successfully, Toast.LENGTH_SHORT).show();
                                             Intent i = new Intent(CreateBankAccountActivity.this, CreateWalletActivity.class);

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.example.rodri.cashbucket.service.AutoDepositService;
+
 /**
  * Created by rodri on 1/18/2017.
  */
@@ -19,6 +21,10 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
         if (intent.getAction().equals(ACTION)) {
             // start a service
             Toast.makeText(context, "Something", Toast.LENGTH_SHORT).show();
+            System.out.println("I've been here (BroadcastReceiver)");
+
+            Intent serviceIntent = new Intent(context, AutoDepositService.class);
+            context.startService(serviceIntent);
         }
     }
 }
