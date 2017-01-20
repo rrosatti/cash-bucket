@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_bank_account_title"
                 android:textSize="8pt"
-                android:layout_weight="3"/>
+                android:layout_weight="2"/>
 
             <TextView
                 android:id="@+id/tabCashFlow_etBankAccount"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_wallet"
                 android:textSize="8pt"
-                android:layout_weight="3"/>
+                android:layout_weight="2"/>
 
             <TextView
                 android:id="@+id/tabCashFlow_etWallet"

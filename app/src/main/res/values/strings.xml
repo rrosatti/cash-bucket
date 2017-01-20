@@ -17,6 +17,7 @@
     <string name="button_confirm">Confirm</string>
     <string name="button_calendar">Calendar</string>
     <string name="button_cancel">Cancel</string>
+    <string name="button_ok">OK</string>
 
     <!-- Toast -->
     <string name="toast_name_field_empty">The personal name field cannot be empty!</string>
@@ -68,12 +69,14 @@
     <string name="check_auto_deposit">Auto-deposit</string>
     <string name="check_remember_me">Remember me</string>
     <string name="check_auto_login">Auto login</string>
+    <string name="check_auto_deposit_notification">Auto Deposit Notification</string>
 
     <!-- Settings -->
     <string-array name="settings_options">
         <item>Account</item>
         <item>Bank Account Settings</item>
         <item>Wallet Settings</item>
+        <item>Notifications</item>
     </string-array>
 
     <!-- Dialog -->

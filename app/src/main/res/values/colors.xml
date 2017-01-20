@@ -6,4 +6,10 @@
 
     <!-- Temp Splash Screen Background -->
     <color name="splash_background">#fefffe</color>
+
+    <!-- Progress Bar -->
+    <color name="preloader_start">#446789</color>
+    <color name="preloader_center">#064789</color>
+    <color name="preloader_end">#73AADD</color>
+
 </resources>

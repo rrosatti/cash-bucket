@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+
+        <CheckBox
+            android:id="@+id/activityMN_checkAutoDepositNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/check_auto_deposit_notification"/>
+
+        <Button
+            android:id="@+id/activityMN_btConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_confirm"
+            android:layout_marginTop="30dp"/>
+
+        <Button
+            android:id="@+id/activityMN_btCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_cancel"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
