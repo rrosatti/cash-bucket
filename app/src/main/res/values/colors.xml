@@ -12,4 +12,10 @@
     <color name="preloader_center">#064789</color>
     <color name="preloader_end">#73AADD</color>
 
+    <!-- Bar Chart Colors -->
+    <color name="bar_color_1">#74D3AE</color>
+    <color name="bar_color_2">#678D58</color>
+    <color name="bar_color_3">#DDE392</color>
+    <color name="bar_color_4">#DD9787</color>
+
 </resources>

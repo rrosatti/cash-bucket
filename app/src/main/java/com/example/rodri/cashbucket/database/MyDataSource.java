@@ -489,6 +489,28 @@ public class MyDataSource {
 
     }
 
+    public List<CashMovement> getCashMovements(long userId, int month, int year) {
+        List<CashMovement> cashMovements = new ArrayList<>();
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_CASH_MOVEMENT, cashMovementColumns,
+                MySQLiteHelper.COLUMN_USER_ID + " = " + userId + " AND " +
+                        MySQLiteHelper.COLUMN_MONTH + " = " + month + " AND " +
+                        MySQLiteHelper.COLUMN_YEAR + " = " + year, null, null, null, null);
+
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return null;
+        }
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            cashMovements.add(cursorToCashMovement(cursor));
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return cashMovements;
+    }
+
     /** ------------ UPDATE ---------------- */
 
     public boolean updateBankAccount(long bankAccountId, double balance) {
