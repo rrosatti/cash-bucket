@@ -23,6 +23,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +33,10 @@ import java.util.List;
  */
 
 public class StatisticsFragment extends Fragment {
+
+    private static final String STATE_CHART_DATA = "data";
+    private static final String STATE_MONTH = "month";
+    private static final String STATE_YEAR = "year";
 
     private Spinner spinnerMonths;
     private Spinner spinnerYears;
@@ -73,6 +78,13 @@ public class StatisticsFragment extends Fragment {
 
         ArrayAdapter<String> adapterYears = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, years);
         spinnerYears.setAdapter(adapterYears);
+
+        if (savedInstanceState != null) {
+            selectedMonth = savedInstanceState.getInt(STATE_MONTH);
+            selectedYear = savedInstanceState.getInt(STATE_YEAR);
+            GetDataFromDatabase task = new GetDataFromDatabase();
+            task.execute("");
+        }
 
         spinnerMonths.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -170,11 +182,7 @@ public class StatisticsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             progressBar.setVisibility(View.GONE);
-            barChart.setData(barData);
-            barChart.setDescription(months[selectedMonth-1]+"/"+selectedYear);
-            barChart.getLegend().setEnabled(true);
-            barChart.animateY(1200);
-            barChart.invalidate();
+            showChartData();
         }
     }
 
@@ -197,5 +205,21 @@ public class StatisticsFragment extends Fragment {
         };
 
         return barColors;
+    }
+
+    private void showChartData() {
+        barChart.setData(barData);
+        barChart.setDescription(months[selectedMonth-1]+"/"+selectedYear);
+        barChart.getLegend().setEnabled(true);
+        barChart.animateY(1200);
+        barChart.invalidate();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(STATE_MONTH, selectedMonth);
+        outState.putInt(STATE_YEAR, selectedYear);
     }
 }
