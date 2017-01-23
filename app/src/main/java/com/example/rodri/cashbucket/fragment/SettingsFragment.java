@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 
 import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.adapter.SettingsAdapter;
+import com.example.rodri.cashbucket.other.SimpleDividerItemDecorator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,6 +42,9 @@ public class SettingsFragment extends Fragment {
 
         listSettingsOp = Arrays.asList(getActivity().getResources().getStringArray(R.array.settings_options));
         adapter = new SettingsAdapter(getActivity(), listSettingsOp, this);
+
+        // Setting up the Divider Decoration
+        listSettings.addItemDecoration(new SimpleDividerItemDecorator(getContext()));
 
         // Setting the LayoutManager to the Recycler View
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
