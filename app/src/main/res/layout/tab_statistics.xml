@@ -26,7 +26,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/button_ok"/>
+            android:text="@string/button_ok"
+            android:background="@drawable/custom_button_states"
+            android:textColor="@drawable/button_text_color"
+            android:textAllCaps="false"/>
 
     </LinearLayout>
 

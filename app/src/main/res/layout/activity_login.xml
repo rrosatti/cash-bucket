@@ -47,8 +47,8 @@
             android:layout_height="wrap_content"
             android:text="@string/button_signup"
             android:layout_marginTop="15dp"
-            android:background="@drawable/custom_button_states"
-            android:textColor="@drawable/button_text_color"
+            android:background="@drawable/custom_sign_up_button_states"
+            android:textColor="@drawable/sign_up_button_text_color"
             android:textAllCaps="false"/>
 
     </LinearLayout>

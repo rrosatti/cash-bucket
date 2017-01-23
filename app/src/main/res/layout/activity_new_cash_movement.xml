@@ -33,7 +33,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/button_calendar"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:background="@drawable/custom_button_states"
+                android:textColor="@drawable/button_text_color"
+                android:textAllCaps="false"/>
 
         </LinearLayout>
 
@@ -57,7 +60,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/button_confirm"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp"
+            android:background="@drawable/custom_button_states"
+            android:textColor="@drawable/button_text_color"
+            android:textAllCaps="false"/>
 
         <Button
             android:id="@+id/activityNewCM_btCancel"

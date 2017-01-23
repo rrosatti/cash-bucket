@@ -21,5 +21,7 @@
     <!-- Button -->
     <color name="button_color">#26935d</color>
     <color name="button_pressed_color">#134a2f</color>
+    <color name="sign_up_button_color">#134a2f</color>
+    <color name="sign_up_button_pressed_color">#26935d</color>
 
 </resources>

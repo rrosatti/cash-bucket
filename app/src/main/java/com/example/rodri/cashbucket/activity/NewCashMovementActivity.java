@@ -107,7 +107,13 @@ public class NewCashMovementActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 double value = 0.0;
-                value = Double.parseDouble(etValue.getText().toString());
+                try {
+                    value = Double.parseDouble(etValue.getText().toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    value = 0.00;
+                }
+
                 String desc = etDesc.getText().toString();
                 selectedType += 1;
 
