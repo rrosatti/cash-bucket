@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.database.MyDataSource;
 import com.example.rodri.cashbucket.model.CashMovement;
+import com.example.rodri.cashbucket.util.Util;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
     private List<CashMovement> cashMovements;
     private MyDataSource dataSource;
     private TypedArray images;
+    private Util util = new Util();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView displayValue;
@@ -40,6 +43,14 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
             displayIcon = (ImageView) v.findViewById(R.id.listItemCashMovement_imgIcon);
             displayDate = (TextView) v.findViewById(R.id.listItemCashMovement_txtDate);
             displayDesc = (TextView) v.findViewById(R.id.listItemCashMovement_txtDesc);
+
+            v.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Toast.makeText(activity, "Value: " + displayValue.getText().toString(), Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            });
 
         }
     }
@@ -75,9 +86,10 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
 
         String date = sDay+"/"+sMonth+"/"+sYear;
 
-        String value = "R$ " + String.valueOf(cashMovement.getValue());
+        //String value = "R$ " + String.valueOf(cashMovement.getValue());
+        String sValue = util.formatMoneyString(cashMovement.getValue(), "R$");
 
-        holder.displayValue.setText(value);
+        holder.displayValue.setText(sValue);
         holder.displayDate.setText(date);
         holder.displayIcon.setImageResource(images.getResourceId(cashMovement.getType()-1, -1));
         holder.displayDesc.setText(cashMovement.getDesc());

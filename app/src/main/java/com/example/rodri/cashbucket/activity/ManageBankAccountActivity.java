@@ -124,7 +124,8 @@ public class ManageBankAccountActivity extends AppCompatActivity {
     }
 
     private void fillBankData() {
-        etBalance.setText(String.valueOf(bankAccount.getBalance()));
+        String sBalance = util.formatNumberWithoutCurrency(bankAccount.getBalance());
+        etBalance.setText(sBalance);
     }
 
     private void fillAutoDepositData() {
@@ -134,7 +135,8 @@ public class ManageBankAccountActivity extends AppCompatActivity {
         containerTitles.setVisibility(View.VISIBLE);
         containerValues.setVisibility(View.VISIBLE);
 
-        etAutoDepositValue.setText(String.valueOf(autoDeposit.getValue()));
+        String sAutoDepositValue = util.formatNumberWithoutCurrency(autoDeposit.getValue());
+        etAutoDepositValue.setText(sAutoDepositValue);
         etDay.setText(String.valueOf(autoDeposit.getDay()));
     }
 

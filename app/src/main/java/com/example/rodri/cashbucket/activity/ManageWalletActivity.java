@@ -14,6 +14,7 @@ import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.database.MyDataSource;
 import com.example.rodri.cashbucket.model.Login;
 import com.example.rodri.cashbucket.model.Wallet;
+import com.example.rodri.cashbucket.util.Util;
 
 /**
  * Created by rodri on 1/13/2017.
@@ -28,6 +29,7 @@ public class ManageWalletActivity extends AppCompatActivity {
     private Wallet wallet;
     private boolean walletExists = false;
     private double currentBalance;
+    private Util util = new Util();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -129,6 +131,7 @@ public class ManageWalletActivity extends AppCompatActivity {
     }
 
     private void fillWalletData() {
-        etBalance.setText(String.valueOf(wallet.getBalance()));
+        String sBalance = util.formatNumberWithoutCurrency(wallet.getBalance());
+        etBalance.setText(sBalance);
     }
 }

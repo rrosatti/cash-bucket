@@ -22,6 +22,7 @@ import com.example.rodri.cashbucket.model.CashMovement;
 import com.example.rodri.cashbucket.model.Login;
 import com.example.rodri.cashbucket.model.Wallet;
 import com.example.rodri.cashbucket.other.SimpleDividerItemDecorator;
+import com.example.rodri.cashbucket.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,7 @@ public class CashFlowFragment extends Fragment{
     private CashMovementAdapter adapter;
     private BankAccount bankAccount;
     private Wallet wallet;
+    private Util util = new Util();
 
     @Nullable
     @Override
@@ -114,8 +116,10 @@ public class CashFlowFragment extends Fragment{
     }
 
     private void updateBalances() {
-        String sBankAccount = "R$ " + String.valueOf(bankAccount.getBalance());
-        String sWallet = "R$ " + String.valueOf(wallet.getBalance());
+        //String sBankAccount = "R$ " + String.valueOf(bankAccount.getBalance());
+        //String sWallet = "R$ " + String.valueOf(wallet.getBalance());
+        String sBankAccount = util.formatMoneyString(bankAccount.getBalance(), "R$");
+        String sWallet = util.formatMoneyString(wallet.getBalance(), "R$");
 
         etBankAccount.setText(sBankAccount);
         etWallet.setText(sWallet);
