@@ -8,9 +8,9 @@
     <color name="splash_background">#fefffe</color>
 
     <!-- Progress Bar -->
-    <color name="preloader_start">#446789</color>
-    <color name="preloader_center">#064789</color>
-    <color name="preloader_end">#73AADD</color>
+    <color name="preloader_start">#134a2f</color>
+    <color name="preloader_center">#26935d</color>
+    <color name="preloader_end">#33ca7f</color>
 
     <!-- Bar Chart Colors -->
     <color name="bar_color_1">#74D3AE</color>
@@ -23,5 +23,7 @@
     <color name="button_pressed_color">#134a2f</color>
     <color name="sign_up_button_color">#134a2f</color>
     <color name="sign_up_button_pressed_color">#26935d</color>
+    <color name="cancel_button_color">#994636</color>
+    <color name="cancel_button_pressed_color">#703328</color>
 
 </resources>

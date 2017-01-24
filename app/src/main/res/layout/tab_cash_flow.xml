@@ -87,7 +87,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         app:backgroundTint="@color/colorPrimaryDark"
-        android:src="@drawable/plus_white"
+        android:src="@drawable/white_sign"
         app:fabSize="normal"/>
 
 </RelativeLayout>
