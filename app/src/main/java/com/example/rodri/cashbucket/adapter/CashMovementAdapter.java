@@ -1,6 +1,8 @@
 package com.example.rodri.cashbucket.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -35,6 +37,7 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
         public ImageView displayIcon;
         public TextView displayDate;
         public TextView displayDesc;
+        public long cashMovementId;
 
         public MyViewHolder(View v) {
             super(v);
@@ -47,7 +50,7 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
             v.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    Toast.makeText(activity, "Value: " + displayValue.getText().toString(), Toast.LENGTH_SHORT).show();
+                    showAlertDialog(cashMovementId);
                     return true;
                 }
             });
@@ -77,6 +80,8 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
         String sMonth = String.valueOf(cashMovement.getMonth());
         String sYear = String.valueOf(cashMovement.getYear());
 
+        holder.cashMovementId = cashMovement.getId();
+
         if (cashMovement.getDay() < 10) {
             sDay = "0" + sDay;
         }
@@ -103,5 +108,45 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    private void showAlertDialog(final long cashMovementId) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setMessage(R.string.dialog_delete_cash_movement);
+
+        builder.setPositiveButton(R.string.dialog_yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteCashMovement(cashMovementId);
+            }
+        });
+
+        builder.setNegativeButton(R.string.dialog_no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+    private void deleteCashMovement(long cashMovementId) {
+        try {
+            dataSource.open();
+
+            boolean deleted = dataSource.deleteCashMovement(cashMovementId);
+
+            if (deleted) {
+                Toast.makeText(activity, R.string.toast_refresh_page, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(activity, R.string.toast_cash_movement_not_removed, Toast.LENGTH_SHORT).show();
+            }
+
+            dataSource.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            dataSource.close();
+        }
     }
 }

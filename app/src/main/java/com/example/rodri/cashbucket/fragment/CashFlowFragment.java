@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.activity.NewCashMovementActivity;
@@ -31,7 +33,7 @@ import java.util.List;
  * Created by rodri on 1/2/2017.
  */
 
-public class CashFlowFragment extends Fragment{
+public class CashFlowFragment extends Fragment {
 
     private RecyclerView listCashFlow;
     private FloatingActionButton btNewCashMovement;
@@ -43,6 +45,7 @@ public class CashFlowFragment extends Fragment{
     private BankAccount bankAccount;
     private Wallet wallet;
     private Util util = new Util();
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -50,6 +53,7 @@ public class CashFlowFragment extends Fragment{
         View v = inflater.inflate(R.layout.tab_cash_flow, container, false);
 
         iniViews(v);
+        getDataFromDatabase();
 
         // Setting up the Divider decoration
         listCashFlow.addItemDecoration(new SimpleDividerItemDecorator(getContext()));
@@ -70,6 +74,17 @@ public class CashFlowFragment extends Fragment{
         // it will update the Bank Account and Wallet balances
         updateBalances();
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getDataFromDatabase();
+                listCashFlow.setAdapter(adapter);
+                updateBalances();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+        swipeRefreshLayout.setColorSchemeColors(android.R.color.holo_green_dark);
+
         btNewCashMovement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,8 +102,9 @@ public class CashFlowFragment extends Fragment{
         etWallet = (TextView) v.findViewById(R.id.tabCashFlow_etWallet);
         cashMovements = new ArrayList<>();
         dataSource = new MyDataSource(getActivity());
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.tabCashFlow_swipeContainer);
 
-        getDataFromDatabase();
+
     }
 
     private void getDataFromDatabase() {
@@ -140,4 +156,5 @@ public class CashFlowFragment extends Fragment{
             }
         }
     }
+
 }

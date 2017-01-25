@@ -596,6 +596,61 @@ public class MyDataSource {
         return true;
     }
 
+    /** ------------ DELETE ---------------- */
+
+    public boolean deleteCashMovement(long cashMovementId) {
+        Cursor cursorCashMovement = db.query(MySQLiteHelper.TABLE_CASH_MOVEMENT, cashMovementColumns,
+                MySQLiteHelper.KEY_ID + " = " + cashMovementId, null, null, null, null, null);
+
+        if (isCursorEmpty(cursorCashMovement)) {
+            cursorCashMovement.close();
+            return false;
+        }
+        cursorCashMovement.moveToFirst();
+
+        CashMovement cashMovement = cursorToCashMovement(cursorCashMovement);
+        int type = cashMovement.getType();
+        long userId = cashMovement.getUserId();
+
+        /**
+         *  1 - Withdrawal
+         *  2 - Normal Expense
+         *  3 - Debit
+         *  4 - Deposit
+         */
+        boolean succeeded = false;
+        switch (type) {
+            case 1: {
+                succeeded = withdrawal(userId, -cashMovement.getValue());
+                break;
+            }
+            case 2: {
+                succeeded = normalExpense(userId, -cashMovement.getValue());
+                break;
+            }
+            case 3: {
+                succeeded = debit(userId, -cashMovement.getValue());
+                break;
+            }
+            case 4: {
+                succeeded = deposit(userId, -cashMovement.getValue());
+                break;
+            }
+        }
+
+        if (succeeded) {
+            int rowsAffected = db.delete(MySQLiteHelper.TABLE_CASH_MOVEMENT,
+                    MySQLiteHelper.KEY_ID + " = " + cashMovementId, null);
+            if (rowsAffected > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            System.out.println("Something went wrong!");
+            return false;
+        }
+    }
 
     /** ------------ CASH MOVEMENT ACTIONS ---------------- */
 
