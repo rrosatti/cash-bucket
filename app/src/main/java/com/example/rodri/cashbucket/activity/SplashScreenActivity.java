@@ -39,7 +39,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                 long userId = sharedPreferences.getLong(USER_ID, 0);
                 User user = dataSource.getUser(userId);
-                Login.getInstance().login(user.getUsername(), user.getPassword(), getApplicationContext());
+                Login.getInstance().login(user.getUsername(), user.getPassword(), SplashScreenActivity.this);
 
                 if (Login.getInstance().isConnected()) {
                     Intent i = new Intent(SplashScreenActivity.this, MainActivity.class);

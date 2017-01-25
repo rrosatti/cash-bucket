@@ -1,5 +1,6 @@
 package com.example.rodri.cashbucket.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -71,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else if (password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, R.string.toast_password_field_empty, Toast.LENGTH_SHORT).show();
                 } else {
-                    Login.getInstance().login(username, password, getApplicationContext());
+                    Login.getInstance().login(username, password, LoginActivity.this);
                     if (Login.getInstance().isConnected()) {
 
                         SharedPreferences.Editor editor = sharedPreferences.edit();
