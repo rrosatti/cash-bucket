@@ -9,14 +9,14 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/toast_green_border">
+        android:background="@drawable/toast_red_border">
 
         <TextView
-            android:id="@+id/toastGreenTheme_txtMessage"
+            android:id="@+id/toastRedTheme_txtMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="3dp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/red_dark"
             android:textSize="16sp"
             android:layout_gravity="center_vertical"/>
 

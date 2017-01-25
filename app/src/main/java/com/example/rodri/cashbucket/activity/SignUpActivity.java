@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.database.MyDataSource;
+import com.example.rodri.cashbucket.util.Util;
 
 /**
  * Created by rodri on 12/15/2016.
@@ -23,6 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText etPassword;
     private Button btConfirm;
     private MyDataSource dataSource;
+    private Util util = new Util();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,11 +43,14 @@ public class SignUpActivity extends AppCompatActivity {
                 password = etPassword.getText().toString();
 
                 if (name.isEmpty()) {
-                    Toast.makeText(SignUpActivity.this, R.string.toast_name_field_empty, Toast.LENGTH_SHORT).show();
+                    String message = getString(R.string.toast_name_field_empty);
+                    util.showRedThemeToast(SignUpActivity.this, message);
                 } else if (username.isEmpty()) {
-                    Toast.makeText(SignUpActivity.this, R.string.toast_username_field_empty, Toast.LENGTH_SHORT).show();
+                    String message = getString(R.string.toast_username_field_empty);
+                    util.showRedThemeToast(SignUpActivity.this, message);
                 } else if (password.isEmpty()) {
-                    Toast.makeText(SignUpActivity.this, R.string.toast_password_field_empty, Toast.LENGTH_SHORT).show();
+                    String message = getString(R.string.toast_password_field_empty);
+                    util.showRedThemeToast(SignUpActivity.this, message);
                 } else {
 
                     try {
@@ -54,8 +59,9 @@ public class SignUpActivity extends AppCompatActivity {
                         long userId = dataSource.createUser(name, username, password);
 
                         if (userId != 0) {
-                            Toast.makeText(SignUpActivity.this, R.string.toast_account_created_successfully, Toast.LENGTH_SHORT)
-                                    .show();
+                            String message = getString(R.string.toast_account_created_successfully);
+                            util.showGreenThemeToast(SignUpActivity.this, message);
+
                             dataSource.createAutoLogin(userId);
                             dataSource.close();
                             Intent i = new Intent(SignUpActivity.this, CreateBankAccountActivity.class);
@@ -63,7 +69,8 @@ public class SignUpActivity extends AppCompatActivity {
                             startActivity(i);
                             finish();
                         } else {
-                            Toast.makeText(SignUpActivity.this, R.string.toast_something_went_wrong, Toast.LENGTH_SHORT).show();
+                            String message = getString(R.string.toast_something_went_wrong);
+                            util.showRedThemeToast(SignUpActivity.this, message);
                             return;
                         }
 

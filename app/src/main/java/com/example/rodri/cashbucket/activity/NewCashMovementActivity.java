@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.database.MyDataSource;
 import com.example.rodri.cashbucket.model.Login;
+import com.example.rodri.cashbucket.util.Util;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -44,6 +45,7 @@ public class NewCashMovementActivity extends AppCompatActivity {
     private List<String> spinValues;
     private ArrayAdapter<String> adapterTypes;
     private int selectedType = -1;
+    private Util util = new Util();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,7 +77,7 @@ public class NewCashMovementActivity extends AppCompatActivity {
                         }
                         date = sDay+"/"+sMonth+"/"+sYear;
                         txtDate.setText(date);
-                        Toast.makeText(NewCashMovementActivity.this, date, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(NewCashMovementActivity.this, date, Toast.LENGTH_SHORT).show();
                     }
                 };
 
@@ -118,10 +120,12 @@ public class NewCashMovementActivity extends AppCompatActivity {
                 selectedType += 1;
 
                 if (value == 0) {
-                    Toast.makeText(NewCashMovementActivity.this, R.string.toast_value_field_empty, Toast.LENGTH_SHORT).show();
+                    String message = getString(R.string.toast_value_field_empty);
+                    util.showRedThemeToast(NewCashMovementActivity.this, message);
                     return;
                 } else if (day == 0) {
-                    Toast.makeText(NewCashMovementActivity.this, R.string.toast_date_field_empty, Toast.LENGTH_SHORT).show();
+                    String message = getString(R.string.toast_date_field_empty);
+                    util.showRedThemeToast(NewCashMovementActivity.this, message);
                     return;
                 } else {
 
@@ -154,8 +158,8 @@ public class NewCashMovementActivity extends AppCompatActivity {
                             setResult(Activity.RESULT_OK);
                             finish();
                         } else {
-                            Toast.makeText(NewCashMovementActivity.this, R.string.toast_something_went_wrong,
-                                    Toast.LENGTH_SHORT).show();
+                            String message = getString(R.string.toast_something_went_wrong);
+                            util.showRedThemeToast(NewCashMovementActivity.this, message);
                         }
 
                     } catch (Exception e) {

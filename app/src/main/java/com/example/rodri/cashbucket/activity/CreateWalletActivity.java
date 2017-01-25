@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.database.MyDataSource;
+import com.example.rodri.cashbucket.util.Util;
 
 /**
  * Created by rodri on 1/9/2017.
@@ -21,6 +22,7 @@ public class CreateWalletActivity extends AppCompatActivity {
     private Button btConfirm;
     private MyDataSource dataSource;
     private long userId = 0;
+    private Util util = new Util();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +38,8 @@ public class CreateWalletActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String sValue = etValue.getText().toString();
                 if (sValue.isEmpty()) {
-                    Toast.makeText(CreateWalletActivity.this, R.string.toast_wallet_value_empty, Toast.LENGTH_SHORT).show();
+                    String message = getString(R.string.toast_wallet_value_empty);
+                    util.showRedThemeToast(CreateWalletActivity.this, message);
                     return;
                 } else {
                     try {
@@ -48,11 +51,12 @@ public class CreateWalletActivity extends AppCompatActivity {
                         if (walletId != 0) {
                             boolean userWallet = dataSource.createUserWallet(userId, walletId);
                             if (!userWallet) {
-                                Toast.makeText(CreateWalletActivity.this, R.string.toast_something_went_wrong, Toast.LENGTH_SHORT).show();
+                                String message = getString(R.string.toast_something_went_wrong);
+                                util.showRedThemeToast(CreateWalletActivity.this, message);
                                 return;
                             }
-                            Toast.makeText(CreateWalletActivity.this, R.string.toast_wallet_created_successfully,
-                                    Toast.LENGTH_SHORT).show();
+                            String message = getString(R.string.toast_wallet_created_successfully);
+                            util.showGreenThemeToast(CreateWalletActivity.this, message);
                             finish();
                         }
                     } catch (Exception e) {

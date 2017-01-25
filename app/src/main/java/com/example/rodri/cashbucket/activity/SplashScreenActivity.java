@@ -12,6 +12,7 @@ import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.database.MyDataSource;
 import com.example.rodri.cashbucket.model.Login;
 import com.example.rodri.cashbucket.model.User;
+import com.example.rodri.cashbucket.util.Util;
 
 /**
  * Created by rodri on 1/15/2017.
@@ -25,6 +26,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private MyDataSource dataSource;
     private SharedPreferences sharedPreferences;
+    private Util util = new Util();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,8 +48,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 } else {
-                    Toast.makeText(SplashScreenActivity.this, R.string.toast_something_went_wrong,
-                            Toast.LENGTH_SHORT).show();
+                    String message = getString(R.string.toast_something_went_wrong);
+                    util.showRedThemeToast(SplashScreenActivity.this, message);
                     Intent i = new Intent(SplashScreenActivity.this, LoginActivity.class);
                     startActivity(i);
                     finish();

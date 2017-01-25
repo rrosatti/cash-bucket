@@ -77,13 +77,14 @@ public class CashFlowFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
                 getDataFromDatabase();
                 listCashFlow.setAdapter(adapter);
                 updateBalances();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-        swipeRefreshLayout.setColorSchemeColors(android.R.color.holo_green_dark);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
 
         btNewCashMovement.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,8 +133,6 @@ public class CashFlowFragment extends Fragment {
     }
 
     private void updateBalances() {
-        //String sBankAccount = "R$ " + String.valueOf(bankAccount.getBalance());
-        //String sWallet = "R$ " + String.valueOf(wallet.getBalance());
         String sBankAccount = util.formatMoneyString(bankAccount.getBalance(), "R$");
         String sWallet = util.formatMoneyString(wallet.getBalance(), "R$");
 
@@ -147,7 +146,6 @@ public class CashFlowFragment extends Fragment {
         switch (requestCode) {
             case 1: {
                 if (resultCode == Activity.RESULT_OK) {
-                    System.out.println("I've been here!");
                     //adapter.notifyDataSetChanged();
                     getDataFromDatabase();
                     listCashFlow.setAdapter(adapter);

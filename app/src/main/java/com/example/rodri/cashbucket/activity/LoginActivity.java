@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.database.MyDataSource;
 import com.example.rodri.cashbucket.model.Login;
+import com.example.rodri.cashbucket.util.Util;
 
 /**
  * Created by rodri on 12/15/2016.
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean checked = false;
     private MyDataSource dataSource;
     private SharedPreferences sharedPreferences;
+    private Util util = new Util();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,9 +70,11 @@ public class LoginActivity extends AppCompatActivity {
                 username = etUsername.getText().toString();
                 password = etPassword.getText().toString();
                 if (username.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, R.string.toast_username_field_empty, Toast.LENGTH_SHORT).show();
+                    String message = getString(R.string.toast_username_field_empty);
+                    util.showRedThemeToast(LoginActivity.this, message);
                 } else if (password.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, R.string.toast_password_field_empty, Toast.LENGTH_SHORT).show();
+                    String message = getString(R.string.toast_password_field_empty);
+                    util.showRedThemeToast(LoginActivity.this, message);
                 } else {
                     Login.getInstance().login(username, password, LoginActivity.this);
                     if (Login.getInstance().isConnected()) {

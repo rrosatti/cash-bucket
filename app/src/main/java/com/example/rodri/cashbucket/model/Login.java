@@ -50,12 +50,12 @@ public class Login {
             user = dataSource.getUser(username, password);
 
             if (user == null) {
-                Toast.makeText(this.activity, R.string.toast_login_failure, Toast.LENGTH_SHORT).show();
+                String message = activity.getString(R.string.toast_login_failure);
+                util.showRedThemeToast(this.activity, message);
                 return false;
             } else {
-                //Toast.makeText(activity, R.string.toast_login_success, Toast.LENGTH_SHORT).show();
                 String message = activity.getString(R.string.toast_login_success);
-                util.showCustomToast(activity, message, R.drawable.money_bag);
+                util.showGreenThemeToastWithImage(activity, message, R.drawable.money_bag);
                 isConnected = true;
                 userId = user.getId();
                 return true;

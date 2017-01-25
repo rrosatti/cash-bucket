@@ -91,7 +91,6 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
 
         String date = sDay+"/"+sMonth+"/"+sYear;
 
-        //String value = "R$ " + String.valueOf(cashMovement.getValue());
         String sValue = util.formatMoneyString(cashMovement.getValue(), "R$");
 
         holder.displayValue.setText(sValue);
@@ -138,9 +137,11 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
             boolean deleted = dataSource.deleteCashMovement(cashMovementId);
 
             if (deleted) {
-                Toast.makeText(activity, R.string.toast_refresh_page, Toast.LENGTH_SHORT).show();
+                String message = activity.getString(R.string.toast_refresh_page);
+                util.showGreenThemeToastWithImage(activity, message, R.drawable.refresh_icon);
             } else {
-                Toast.makeText(activity, R.string.toast_cash_movement_not_removed, Toast.LENGTH_SHORT).show();
+                String message = activity.getString(R.string.toast_cash_movement_not_removed);
+                util.showRedThemeToast(activity, message);
             }
 
             dataSource.close();

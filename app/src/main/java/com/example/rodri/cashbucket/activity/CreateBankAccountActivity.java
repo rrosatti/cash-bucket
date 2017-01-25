@@ -1,5 +1,6 @@
 package com.example.rodri.cashbucket.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.database.MyDataSource;
+import com.example.rodri.cashbucket.util.Util;
 
 /**
  * Created by rodri on 12/19/2016.
@@ -34,6 +36,7 @@ public class CreateBankAccountActivity extends AppCompatActivity {
     private boolean checked = false;
     private long userId = -1;
     private SharedPreferences sharedPreferences;
+    private Util util = new Util();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +52,8 @@ public class CreateBankAccountActivity extends AppCompatActivity {
 
         } catch (NullPointerException e) {
             e.printStackTrace();
-            Toast.makeText(CreateBankAccountActivity.this, R.string.toast_no_user_id, Toast.LENGTH_SHORT).show();
+            String message = getString(R.string.toast_no_user_id);
+            util.showRedThemeToast(CreateBankAccountActivity.this, message);
         }
 
         checkAutoDeposit.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -80,13 +84,16 @@ public class CreateBankAccountActivity extends AppCompatActivity {
                 day = Integer.parseInt(sDay);
 
                 if (sBalance.isEmpty()) {
-                    Toast.makeText(CreateBankAccountActivity.this, R.string.toast_balance_field_empty, Toast.LENGTH_SHORT).show();
+                    String message = getString(R.string.toast_balance_field_empty);
+                    util.showRedThemeToast(CreateBankAccountActivity.this, message);
                 } else {
                     if (checked) {
                         if (sValue.isEmpty()) {
-                            Toast.makeText(CreateBankAccountActivity.this, R.string.toast_value_field_empty, Toast.LENGTH_SHORT).show();
+                            String message = getString(R.string.toast_value_field_empty);
+                            util.showRedThemeToast(CreateBankAccountActivity.this, message);
                         } else if (sDay.isEmpty()) {
-                            Toast.makeText(CreateBankAccountActivity.this, R.string.toast_day_field_empty, Toast.LENGTH_SHORT).show();
+                            String message = getString(R.string.toast_day_field_empty);
+                            util.showRedThemeToast(CreateBankAccountActivity.this, message);
                         } else {
 
                             // create bank account and auto deposit
@@ -104,23 +111,24 @@ public class CreateBankAccountActivity extends AppCompatActivity {
                                             editor.putBoolean(NOTIFY, true);
                                             editor.apply();
 
-                                            Toast.makeText(CreateBankAccountActivity.this,
-                                                    R.string.toast_bank_account_created_successfully, Toast.LENGTH_SHORT).show();
+                                            String message = getString(R.string.toast_bank_account_created_successfully);
+                                            util.showGreenThemeToast(CreateBankAccountActivity.this, message);
+
                                             Intent i = new Intent(CreateBankAccountActivity.this, CreateWalletActivity.class);
                                             i.putExtra("userId", userId);
                                             startActivity(i);
                                             finish();
                                         } else {
-                                            Toast.makeText(CreateBankAccountActivity.this,
-                                                    R.string.toast_something_went_wrong, Toast.LENGTH_SHORT).show();
+                                            String message = getString(R.string.toast_something_went_wrong);
+                                            util.showRedThemeToast(CreateBankAccountActivity.this, message);
                                         }
                                     } else {
-                                        Toast.makeText(CreateBankAccountActivity.this,
-                                                R.string.toast_something_went_wrong, Toast.LENGTH_SHORT).show();
+                                        String message = getString(R.string.toast_something_went_wrong);
+                                        util.showRedThemeToast(CreateBankAccountActivity.this, message);
                                     }
                                 } else {
-                                    Toast.makeText(CreateBankAccountActivity.this,
-                                            R.string.toast_something_went_wrong, Toast.LENGTH_SHORT).show();
+                                    String message = getString(R.string.toast_something_went_wrong);
+                                    util.showRedThemeToast(CreateBankAccountActivity.this, message);
                                 }
                                 dataSource.close();
 
@@ -140,16 +148,16 @@ public class CreateBankAccountActivity extends AppCompatActivity {
                             if (bankAccountId != 0) {
                                 boolean created = dataSource.createUserBankAccount(userId, bankAccountId);
                                 if (created) {
-                                    Toast.makeText(CreateBankAccountActivity.this,
-                                            R.string.toast_bank_account_created_successfully, Toast.LENGTH_SHORT).show();
+                                    String message = getString(R.string.toast_bank_account_created_successfully);
+                                    util.showGreenThemeToast(CreateBankAccountActivity.this, message);
                                     finish();
                                 } else {
-                                    Toast.makeText(CreateBankAccountActivity.this,
-                                            R.string.toast_something_went_wrong, Toast.LENGTH_SHORT).show();
+                                    String message = getString(R.string.toast_something_went_wrong);
+                                    util.showRedThemeToast(CreateBankAccountActivity.this, message);
                                 }
                             } else {
-                                Toast.makeText(CreateBankAccountActivity.this,
-                                        R.string.toast_something_went_wrong, Toast.LENGTH_SHORT).show();
+                                String message = getString(R.string.toast_something_went_wrong);
+                                util.showRedThemeToast(CreateBankAccountActivity.this, message);
                             }
                             dataSource.close();
 

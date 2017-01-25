@@ -35,24 +35,56 @@ public class Util {
         return formatter.format(value);
     }
 
-    public void showCustomToast(Activity activity, String message, int imageId) {
+    public void showGreenThemeToastWithImage(Activity activity, String message, int imageId) {
+        Context context = activity.getApplicationContext();
+        LayoutInflater inflater = activity.getLayoutInflater();
+
+        View customToast = inflater.inflate(R.layout.toast_green_theme_with_image, null);
+        Toast toast = new Toast(context);
+
+        ImageView img = (ImageView) customToast.findViewById(R.id.toastGreenThemeWI_img);
+        TextView txt = (TextView) customToast.findViewById(R.id.toastGreenThemeWI_txtMessage);
+
+        img.setImageResource(imageId);
+        txt.setText(message);
+
+        toast.setView(customToast);
+        showToast(toast);
+        
+    }
+
+    public void showRedThemeToast(Activity activity, String message) {
+        Context context = activity.getApplicationContext();
+        LayoutInflater inflater = activity.getLayoutInflater();
+
+        View customToast = inflater.inflate(R.layout.toast_red_theme, null);
+        Toast toast = new Toast(context);
+
+        TextView txt = (TextView) customToast.findViewById(R.id.toastRedTheme_txtMessage);
+        txt.setText(message);
+
+        toast.setView(customToast);
+        showToast(toast);
+    }
+
+    public void showGreenThemeToast(Activity activity, String message) {
         Context context = activity.getApplicationContext();
         LayoutInflater inflater = activity.getLayoutInflater();
 
         View customToast = inflater.inflate(R.layout.toast_green_theme, null);
         Toast toast = new Toast(context);
 
-        ImageView img = (ImageView) customToast.findViewById(R.id.toastGreenTheme_img);
         TextView txt = (TextView) customToast.findViewById(R.id.toastGreenTheme_txtMessage);
-
-        img.setImageResource(imageId);
         txt.setText(message);
 
         toast.setView(customToast);
+        showToast(toast);
+    }
+
+    private void showToast(Toast toast) {
         toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
-        
     }
 
 }
