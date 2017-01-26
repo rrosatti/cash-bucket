@@ -34,7 +34,6 @@ import java.util.List;
 
 public class StatisticsFragment extends Fragment {
 
-    private static final String STATE_CHART_DATA = "data";
     private static final String STATE_MONTH = "month";
     private static final String STATE_YEAR = "year";
 

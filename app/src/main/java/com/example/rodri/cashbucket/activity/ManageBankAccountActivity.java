@@ -108,7 +108,7 @@ public class ManageBankAccountActivity extends AppCompatActivity {
             long userId = Login.getInstance().getUserId();
             bankAccount = dataSource.getBankAccount(userId);
             autoDeposit = dataSource.getAutoDeposit(bankAccount.getId());
-            System.out.println("I've been here!");
+
             if (bankAccount != null) {
                 fillBankData();
             }
@@ -154,7 +154,8 @@ public class ManageBankAccountActivity extends AppCompatActivity {
                 //oldChecked = false;
                 autoDeposit.setActive(false);
             } else {
-                Toast.makeText(ManageBankAccountActivity.this, R.string.toast_something_went_wrong, Toast.LENGTH_SHORT).show();
+                String message = getString(R.string.toast_something_went_wrong);
+                util.showRedThemeToast(ManageBankAccountActivity.this, message);
             }
 
             dataSource.close();

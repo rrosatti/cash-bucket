@@ -3,6 +3,7 @@ package com.example.rodri.cashbucket.activity;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -31,6 +32,13 @@ import java.util.TimeZone;
 
 public class NewCashMovementActivity extends AppCompatActivity {
 
+    private static final String STATE_VALUE = "value";
+    private static final String STATE_TYPE = "type";
+    private static final String STATE_DESC = "desc";
+    private static final String STATE_DAY = "day";
+    private static final String STATE_MONTH = "month";
+    private static final String STATE_YEAR = "year";
+
     private EditText etValue;
     private TextView txtDate;
     private Button btCalendar;
@@ -55,6 +63,10 @@ public class NewCashMovementActivity extends AppCompatActivity {
         iniViews();
         userId = Login.getInstance().getUserId();
         dataSource = new MyDataSource(NewCashMovementActivity.this);
+
+        if (savedInstanceState != null) {
+            recoverData(savedInstanceState);
+        }
 
         btCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +129,7 @@ public class NewCashMovementActivity extends AppCompatActivity {
                 }
 
                 String desc = etDesc.getText().toString();
-                selectedType += 1;
+                //selectedType += 1;
 
                 if (value == 0) {
                     String message = getString(R.string.toast_value_field_empty);
@@ -132,7 +144,7 @@ public class NewCashMovementActivity extends AppCompatActivity {
                     try {
                         dataSource.open();
 
-                        long id = dataSource.createCashMovement(value, selectedType, day, month, year, desc, userId);
+                        long id = dataSource.createCashMovement(value, selectedType+1, day, month, year, desc, userId);
 
                         if (id != 0) {
                             // change bank account or wallet
@@ -188,5 +200,53 @@ public class NewCashMovementActivity extends AppCompatActivity {
         btConfirm = (Button) findViewById(R.id.activityNewCM_btConfirm);
         btCancel = (Button) findViewById(R.id.activityNewCM_btCancel);
         spinnerTypes = (Spinner) findViewById(R.id.activityNewCM_spinType);
+    }
+
+    private void recoverData(Bundle savedState) {
+        double value = savedState.getDouble(STATE_VALUE, 0);
+        selectedType = savedState.getInt(STATE_TYPE, -1);
+        String desc = savedState.getString(STATE_DESC, "");
+        day = savedState.getInt(STATE_DAY, 0);
+        month = savedState.getInt(STATE_MONTH, 0);
+        year = savedState.getInt(STATE_YEAR, 0);
+
+        if (value != 0) {
+            etValue.setText(String.valueOf(value));
+        }
+        if (selectedType != -1) {
+            spinnerTypes.setSelection(selectedType);
+        }
+        if (!desc.isEmpty()) {
+            etDesc.setText(desc);
+        }
+        if(day != 0) {
+            date = day+"/"+month+"/"+year;
+            txtDate.setText(date);
+        }
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (!etValue.getText().toString().isEmpty()) {
+            outState.putDouble(STATE_VALUE, Double.valueOf(etValue.getText().toString()));
+        }
+
+        if (selectedType != -1) {
+            outState.putInt(STATE_TYPE, selectedType);
+        }
+
+        if (!etDesc.getText().toString().isEmpty()) {
+            outState.putString(STATE_DESC, etDesc.getText().toString());
+        }
+
+        if (day != 0) {
+            outState.putInt(STATE_DAY, day);
+            outState.putInt(STATE_MONTH, month);
+            outState.putInt(STATE_YEAR, year);
+        }
+
     }
 }

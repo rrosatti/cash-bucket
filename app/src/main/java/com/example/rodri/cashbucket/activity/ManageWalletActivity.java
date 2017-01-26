@@ -57,8 +57,8 @@ public class ManageWalletActivity extends AppCompatActivity {
                         double newBalance = Double.valueOf(sBalance);
 
                         if (newBalance == currentBalance) {
-                            Toast.makeText(ManageWalletActivity.this, R.string.toast_no_changes_were_made,
-                                    Toast.LENGTH_SHORT).show();
+                            String message = getString(R.string.toast_no_changes_were_made);
+                            util.showRedThemeToast(ManageWalletActivity.this, message);
                             dialog.cancel();
                         } else {
 

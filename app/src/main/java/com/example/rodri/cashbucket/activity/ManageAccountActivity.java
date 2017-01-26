@@ -18,6 +18,7 @@ import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.database.MyDataSource;
 import com.example.rodri.cashbucket.model.Login;
 import com.example.rodri.cashbucket.model.User;
+import com.example.rodri.cashbucket.util.Util;
 
 /**
  * Created by rodri on 1/14/2017.
@@ -39,6 +40,7 @@ public class ManageAccountActivity extends AppCompatActivity {
     private boolean currentChecked;
     private boolean newChecked;
     private SharedPreferences sharedPreferences;
+    private Util util = new Util();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,11 +74,11 @@ public class ManageAccountActivity extends AppCompatActivity {
                         String sName = etName.getText().toString();
                         String sUsername = etUsername.getText().toString();
                         if (sName.isEmpty()) {
-                            Toast.makeText(ManageAccountActivity.this, R.string.toast_name_field_empty,
-                                    Toast.LENGTH_SHORT).show();
+                            String message = getString(R.string.toast_name_field_empty);
+                            util.showRedThemeToast(ManageAccountActivity.this, message);
                         } else if (sUsername.isEmpty()) {
-                            Toast.makeText(ManageAccountActivity.this, R.string.toast_username_field_empty,
-                                    Toast.LENGTH_SHORT).show();
+                            String message = getString(R.string.toast_username_field_empty);
+                            util.showRedThemeToast(ManageAccountActivity.this, message);
                         } else {
                             // apply the changes
                             user.setName(sName);
@@ -103,12 +105,12 @@ public class ManageAccountActivity extends AppCompatActivity {
                                 dataSource.close();
 
                                 if (userUpdated) {
-                                    Toast.makeText(ManageAccountActivity.this, R.string.toast_changes_successful,
-                                            Toast.LENGTH_SHORT).show();
+                                    String message = getString(R.string.toast_changes_successful);
+                                    util.showGreenThemeToast(ManageAccountActivity.this, message);
                                     finish();
                                 } else {
-                                    Toast.makeText(ManageAccountActivity.this, R.string.toast_something_went_wrong,
-                                            Toast.LENGTH_SHORT).show();
+                                    String message = getString(R.string.toast_something_went_wrong);
+                                    util.showRedThemeToast(ManageAccountActivity.this, message);
                                     dialog.cancel();
                                 }
 
