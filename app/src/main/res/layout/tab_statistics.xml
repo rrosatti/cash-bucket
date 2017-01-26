@@ -12,14 +12,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:layout_marginEnd="5dp"/>
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_spinner_background"
+            android:spinnerMode="dropdown"/>
 
         <Spinner
             android:id="@+id/tabStatistics_spinnerYears"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:layout_marginEnd="5dp"/>
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/custom_spinner_background"
+            android:spinnerMode="dropdown"/>
 
         <Button
             android:id="@+id/tabStatistics_btOk"
@@ -38,7 +42,7 @@
         android:id="@+id/tabStatistics_chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="65dp" />
 
     <ProgressBar
         android:id="@+id/tabStatistics_progressBar"

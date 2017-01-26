@@ -40,11 +40,20 @@
 
             </LinearLayout>
 
+            <!--
             <Spinner
                 android:id="@+id/activityNewCM_spinType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"/>
+            -->
+            <Spinner
+                android:id="@+id/activityNewCM_spinType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_spinner_background" />
 
             <EditText
                 android:id="@+id/activityNewCM_etDesc"

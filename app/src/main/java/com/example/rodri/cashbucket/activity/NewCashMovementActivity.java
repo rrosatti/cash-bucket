@@ -3,7 +3,6 @@ package com.example.rodri.cashbucket.activity;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,9 +13,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.rodri.cashbucket.R;
+import com.example.rodri.cashbucket.adapter.CustomSpinnerAdapter;
 import com.example.rodri.cashbucket.database.MyDataSource;
 import com.example.rodri.cashbucket.model.Login;
 import com.example.rodri.cashbucket.util.Util;
@@ -54,6 +53,7 @@ public class NewCashMovementActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapterTypes;
     private int selectedType = -1;
     private Util util = new Util();
+    private CustomSpinnerAdapter customAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,7 +103,8 @@ public class NewCashMovementActivity extends AppCompatActivity {
 
         spinValues = Arrays.asList(getResources().getStringArray(R.array.list_cash_movement_types));
         adapterTypes = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinValues);
-        spinnerTypes.setAdapter(adapterTypes);
+        customAdapter = new CustomSpinnerAdapter(this, spinValues);
+        spinnerTypes.setAdapter(customAdapter);
 
         spinnerTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

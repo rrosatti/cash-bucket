@@ -13,10 +13,10 @@
     <color name="preloader_end">@color/colorPrimary</color>
 
     <!-- Bar Chart Colors -->
-    <color name="bar_color_1">#74D3AE</color>
+    <color name="bar_color_1">#84A98C</color>
     <color name="bar_color_2">#678D58</color>
-    <color name="bar_color_3">#DDE392</color>
-    <color name="bar_color_4">#DD9787</color>
+    <color name="bar_color_3">#82C09A</color>
+    <color name="bar_color_4">#45503B</color>
 
     <!-- Button -->
     <color name="button_color">@color/colorPrimaryDark</color>
@@ -28,5 +28,6 @@
 
     <!-- Just colors -->
     <color name="red_dark">#703328</color>
+    <color name="spinner_background">#F7F7F7</color>
 
 </resources>

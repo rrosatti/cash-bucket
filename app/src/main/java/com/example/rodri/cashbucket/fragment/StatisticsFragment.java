@@ -12,9 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.rodri.cashbucket.R;
+import com.example.rodri.cashbucket.adapter.CustomSpinnerAdapter;
 import com.example.rodri.cashbucket.database.MyDataSource;
 import com.example.rodri.cashbucket.model.CashMovement;
 import com.example.rodri.cashbucket.model.Login;
@@ -23,7 +23,6 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +53,8 @@ public class StatisticsFragment extends Fragment {
     private List<String> labels = new ArrayList<>();
     private BarDataSet barDataSet;
     private BarData barData;
-
+    private CustomSpinnerAdapter customAdapterMonths;
+    private CustomSpinnerAdapter customAdapterYears;
 
     @Nullable
     @Override
@@ -72,11 +72,13 @@ public class StatisticsFragment extends Fragment {
         months = getActivity().getResources().getStringArray(R.array.months);
         years = generateYears(50);
 
-        ArrayAdapter<String> adapterMonths = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, months);
-        spinnerMonths.setAdapter(adapterMonths);
+        //ArrayAdapter<String> adapterMonths = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, months);
+        customAdapterMonths = new CustomSpinnerAdapter(getActivity(), Arrays.asList(months));
+        spinnerMonths.setAdapter(customAdapterMonths);
 
-        ArrayAdapter<String> adapterYears = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, years);
-        spinnerYears.setAdapter(adapterYears);
+        //ArrayAdapter<String> adapterYears = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, years);
+        customAdapterYears = new CustomSpinnerAdapter(getActivity(), Arrays.asList(years));
+        spinnerYears.setAdapter(customAdapterYears);
 
         if (savedInstanceState != null) {
             selectedMonth = savedInstanceState.getInt(STATE_MONTH);
