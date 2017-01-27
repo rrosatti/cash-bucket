@@ -2,6 +2,7 @@ package com.example.rodri.cashbucket.adapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +34,11 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
     private MyDataSource dataSource;
     private TypedArray images;
     private Util util = new Util();
+
+    // Custom Dialog Views
+    private TextView txtMessage;
+    private Button btYes;
+    private Button btNo;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView displayValue;
@@ -110,6 +118,8 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
     }
 
     private void showAlertDialog(final long cashMovementId) {
+        // old AlertBuilder
+        /**
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setMessage(R.string.dialog_delete_cash_movement);
 
@@ -127,7 +137,32 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
             }
         });
 
-        builder.show();
+        builder.show();*/
+
+        // custom dialog
+        final Dialog dialog = util.createCustomDialog(activity);
+
+        txtMessage = (TextView) dialog.findViewById(R.id.customDialog_txtMessage);
+        btYes = (Button) dialog.findViewById(R.id.customDialog_btYes);
+        btNo = (Button) dialog.findViewById(R.id.customDialog_btNo);
+
+        txtMessage.setText(R.string.dialog_delete_cash_movement);
+
+        btYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteCashMovement(cashMovementId);
+                dialog.cancel();
+            }
+        });
+        btNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
     }
 
     private void deleteCashMovement(long cashMovementId) {

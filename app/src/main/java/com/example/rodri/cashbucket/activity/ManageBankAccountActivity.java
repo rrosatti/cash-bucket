@@ -1,6 +1,7 @@
 package com.example.rodri.cashbucket.activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rodri.cashbucket.R;
@@ -42,6 +44,11 @@ public class ManageBankAccountActivity extends AppCompatActivity {
     private boolean oldChecked = false;
     private boolean newChecked = false;
     private Util util = new Util();
+
+    // Custom Dialog Views
+    private TextView txtMessage;
+    private Button btYes;
+    private Button btNo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -166,6 +173,8 @@ public class ManageBankAccountActivity extends AppCompatActivity {
     }
 
     private void showAutoDepositDialog() {
+        // old Dialog
+        /**
         AlertDialog.Builder builder = new AlertDialog.Builder(ManageBankAccountActivity.this);
         builder.setMessage(R.string.dialog_deactivate_auto_deposit);
 
@@ -181,7 +190,32 @@ public class ManageBankAccountActivity extends AppCompatActivity {
                 dialog.cancel();
             }
         });
-        builder.show();
+        builder.show(); */
+
+        // Custom Dialog
+        final Dialog dialog = util.createCustomDialog(this);
+
+        txtMessage = (TextView) dialog.findViewById(R.id.customDialog_txtMessage);
+        btYes = (Button) dialog.findViewById(R.id.customDialog_btYes);
+        btNo = (Button) dialog.findViewById(R.id.customDialog_btNo);
+
+        txtMessage.setText(R.string.dialog_deactivate_auto_deposit);
+
+        btYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                deactivateAutoDeposit();
+            }
+        });
+        btNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
 
     }
 
@@ -210,13 +244,14 @@ public class ManageBankAccountActivity extends AppCompatActivity {
             day = 1;
         }
 
+        // Old Dialog
+        /**
         AlertDialog.Builder builder = new AlertDialog.Builder(ManageBankAccountActivity.this);
         builder.setMessage(R.string.dialog_confirm_changes);
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
                 try {
                     dataSource.open();
 
@@ -269,6 +304,77 @@ public class ManageBankAccountActivity extends AppCompatActivity {
                 dialog.cancel();
             }
         });
-        builder.show();
+        builder.show();*/
+
+        // Custom Dialog
+        final Dialog dialog = util.createCustomDialog(this);
+
+        txtMessage = (TextView) dialog.findViewById(R.id.customDialog_txtMessage);
+        btYes = (Button) dialog.findViewById(R.id.customDialog_btYes);
+        btNo = (Button) dialog.findViewById(R.id.customDialog_btNo);
+
+        txtMessage.setText(R.string.dialog_confirm_changes);
+
+        btYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                applyChanges(bankBalance, autoDepositValue, day);
+            }
+        });
+        btNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void applyChanges(double bankBalance, double autoDepositValue, int day) {
+        try {
+            dataSource.open();
+
+            long userId = Login.getInstance().getUserId();
+            long newBankAccountId = 0; // it will be assign a value, only if need to create a new bank account
+
+            if (bankAccount != null) {
+                dataSource.updateBankAccount(bankAccount.getId(), bankBalance);
+            } else {
+                newBankAccountId = dataSource.createBankAccount(bankBalance);
+                dataSource.createUserBankAccount(userId, newBankAccountId);
+            }
+
+            if (autoDeposit != null) {
+                if (autoDepositValue > 0) {
+                    autoDeposit.setValue(autoDepositValue);
+                    autoDeposit.setDay(day);
+                    autoDeposit.setActive(true);
+                } else {
+                    autoDeposit.setActive(false);
+                }
+                dataSource.updateAutoDeposit(autoDeposit);
+
+            } else {
+                if (newBankAccountId != 0) {
+                    dataSource.createAutoDeposit(newBankAccountId, autoDepositValue, day);
+                } else {
+                    autoDeposit.setValue(autoDepositValue);
+                    autoDeposit.setDay(day);
+                    autoDeposit.setActive(true);
+                    dataSource.updateAutoDeposit(autoDeposit);
+                }
+
+            }
+            dataSource.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            dataSource.close();
+        }
+
+        // kill activity
+        finish();
     }
 }

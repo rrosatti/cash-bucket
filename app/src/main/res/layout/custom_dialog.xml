@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:padding="2dp"
+    android:background="#FFF">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:background="#FFF">
+
+        <TextView
+            android:id="@+id/customDialog_txtMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="17sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/customDialog_btYes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/button_yes"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                android:layout_marginEnd="10dp"
+                android:minHeight="30dip"/>
+
+            <Button
+                android:id="@+id/customDialog_btNo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/button_no"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:textColor="@color/cancel_button_color"
+                android:textSize="16sp"
+                android:minHeight="30dip"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

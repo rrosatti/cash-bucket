@@ -19,8 +19,8 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         if (intent.getAction().equals(ACTION)) {
-            // start a service
-            Toast.makeText(context, "Something", Toast.LENGTH_SHORT).show();
+            // start the service
+            //Toast.makeText(context, "Something", Toast.LENGTH_SHORT).show();
             System.out.println("I've been here (BroadcastReceiver)");
 
             Intent serviceIntent = new Intent(context, AutoDepositService.class);

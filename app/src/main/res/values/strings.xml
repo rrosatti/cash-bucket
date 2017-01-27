@@ -18,6 +18,8 @@
     <string name="button_calendar">Calendar</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_ok">OK</string>
+    <string name="button_no">No</string>
+    <string name="button_yes">Yes</string>
 
     <!-- Toast -->
     <string name="toast_name_field_empty">The personal name field cannot be empty!</string>

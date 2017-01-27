@@ -1,18 +1,18 @@
 package com.example.rodri.cashbucket.activity;
 
+import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.database.MyDataSource;
@@ -42,6 +42,11 @@ public class ManageAccountActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private Util util = new Util();
 
+    // Custom Dialog Views
+    private TextView txtMessage;
+    private Button btYes;
+    private Button btNo;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,75 +67,8 @@ public class ManageAccountActivity extends AppCompatActivity {
         btConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ManageAccountActivity.this);
+                showAlertDialog();
 
-                builder.setMessage(R.string.dialog_confirm_changes);
-
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        // check if the EditTexts are empty
-                        String sName = etName.getText().toString();
-                        String sUsername = etUsername.getText().toString();
-                        if (sName.isEmpty()) {
-                            String message = getString(R.string.toast_name_field_empty);
-                            util.showRedThemeToast(ManageAccountActivity.this, message);
-                        } else if (sUsername.isEmpty()) {
-                            String message = getString(R.string.toast_username_field_empty);
-                            util.showRedThemeToast(ManageAccountActivity.this, message);
-                        } else {
-                            // apply the changes
-                            user.setName(sName);
-                            user.setUsername(sUsername);
-                            try {
-                                dataSource.open();
-
-                                // check whether the auto login was activated or not
-                                if (currentChecked != newChecked) {
-                                    int active = 0;
-                                    if (newChecked) {
-                                        active = 1;
-                                    }
-
-                                    dataSource.updateAutoLogin(user.getId(), active);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putBoolean(AUTO_LOGIN, newChecked);
-                                    editor.putLong(USER_ID, user.getId());
-                                    editor.apply();
-                                }
-
-                                boolean userUpdated = dataSource.updateUser(user);
-
-                                dataSource.close();
-
-                                if (userUpdated) {
-                                    String message = getString(R.string.toast_changes_successful);
-                                    util.showGreenThemeToast(ManageAccountActivity.this, message);
-                                    finish();
-                                } else {
-                                    String message = getString(R.string.toast_something_went_wrong);
-                                    util.showRedThemeToast(ManageAccountActivity.this, message);
-                                    dialog.cancel();
-                                }
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                dataSource.close();
-                            }
-                        }
-
-                    }
-                });
-
-                builder.setNegativeButton(R.string.dialog_negative_button, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                builder.show();
             }
         });
 
@@ -180,5 +118,156 @@ public class ManageAccountActivity extends AppCompatActivity {
     private void fillUserData() {
         etName.setText(user.getName());
         etUsername.setText(user.getUsername());
+    }
+
+    private void showAlertDialog() {
+        // old AlertBuilder
+        /**
+        AlertDialog.Builder builder = new AlertDialog.Builder(ManageAccountActivity.this);
+
+        builder.setMessage(R.string.dialog_confirm_changes);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                // check if the EditTexts are empty
+                String sName = etName.getText().toString();
+                String sUsername = etUsername.getText().toString();
+                if (sName.isEmpty()) {
+                    String message = getString(R.string.toast_name_field_empty);
+                    util.showRedThemeToast(ManageAccountActivity.this, message);
+                } else if (sUsername.isEmpty()) {
+                    String message = getString(R.string.toast_username_field_empty);
+                    util.showRedThemeToast(ManageAccountActivity.this, message);
+                } else {
+                    // apply the changes
+                    user.setName(sName);
+                    user.setUsername(sUsername);
+                    try {
+                        dataSource.open();
+
+                        // check whether the auto login was activated or not
+                        if (currentChecked != newChecked) {
+                            int active = 0;
+                            if (newChecked) {
+                                active = 1;
+                            }
+
+                            dataSource.updateAutoLogin(user.getId(), active);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putBoolean(AUTO_LOGIN, newChecked);
+                            editor.putLong(USER_ID, user.getId());
+                            editor.apply();
+                        }
+
+                        boolean userUpdated = dataSource.updateUser(user);
+
+                        dataSource.close();
+
+                        if (userUpdated) {
+                            String message = getString(R.string.toast_changes_successful);
+                            util.showGreenThemeToast(ManageAccountActivity.this, message);
+                            finish();
+                        } else {
+                            String message = getString(R.string.toast_something_went_wrong);
+                            util.showRedThemeToast(ManageAccountActivity.this, message);
+                            dialog.cancel();
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        dataSource.close();
+                    }
+                }
+
+            }
+        });
+
+        builder.setNegativeButton(R.string.dialog_negative_button, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();*/
+
+        // custom Dialog
+        final Dialog dialog = util.createCustomDialog(this);
+
+        txtMessage = (TextView) dialog.findViewById(R.id.customDialog_txtMessage);
+        btYes = (Button) dialog.findViewById(R.id.customDialog_btYes);
+        btNo = (Button) dialog.findViewById(R.id.customDialog_btNo);
+
+        txtMessage.setText(R.string.dialog_confirm_changes);
+
+        btYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                applyChanges();
+            }
+        });
+
+        btNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void applyChanges() {
+        // check if the EditTexts are empty
+        String sName = etName.getText().toString();
+        String sUsername = etUsername.getText().toString();
+        if (sName.isEmpty()) {
+            String message = getString(R.string.toast_name_field_empty);
+            util.showRedThemeToast(ManageAccountActivity.this, message);
+        } else if (sUsername.isEmpty()) {
+            String message = getString(R.string.toast_username_field_empty);
+            util.showRedThemeToast(ManageAccountActivity.this, message);
+        } else {
+            // apply the changes
+            user.setName(sName);
+            user.setUsername(sUsername);
+            try {
+                dataSource.open();
+
+                // check whether the auto login was activated or not
+                if (currentChecked != newChecked) {
+                    int active = 0;
+                    if (newChecked) {
+                        active = 1;
+                    }
+
+                    dataSource.updateAutoLogin(user.getId(), active);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean(AUTO_LOGIN, newChecked);
+                    editor.putLong(USER_ID, user.getId());
+                    editor.apply();
+                }
+
+                boolean userUpdated = dataSource.updateUser(user);
+
+                dataSource.close();
+
+                if (userUpdated) {
+                    String message = getString(R.string.toast_changes_successful);
+                    util.showGreenThemeToast(ManageAccountActivity.this, message);
+                    finish();
+                } else {
+                    String message = getString(R.string.toast_something_went_wrong);
+                    util.showRedThemeToast(ManageAccountActivity.this, message);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                dataSource.close();
+            }
+        }
     }
 }
