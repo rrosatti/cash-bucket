@@ -39,10 +39,10 @@
                 android:minHeight="30dip"/>
 
             <Button
-                android:id="@+id/customDialog_btNo"
+                android:id="@+id/customDialog_btDialogCancel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/button_no"
+                android:text="@string/button_cancel"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:textColor="@color/cancel_button_color"

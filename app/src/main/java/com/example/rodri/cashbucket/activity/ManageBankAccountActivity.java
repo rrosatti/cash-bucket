@@ -1,10 +1,6 @@
 package com.example.rodri.cashbucket.activity;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +11,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.database.MyDataSource;
@@ -48,7 +43,7 @@ public class ManageBankAccountActivity extends AppCompatActivity {
     // Custom Dialog Views
     private TextView txtMessage;
     private Button btYes;
-    private Button btNo;
+    private Button btDialogCancel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -197,7 +192,7 @@ public class ManageBankAccountActivity extends AppCompatActivity {
 
         txtMessage = (TextView) dialog.findViewById(R.id.customDialog_txtMessage);
         btYes = (Button) dialog.findViewById(R.id.customDialog_btYes);
-        btNo = (Button) dialog.findViewById(R.id.customDialog_btNo);
+        btDialogCancel = (Button) dialog.findViewById(R.id.customDialog_btDialogCancel);
 
         txtMessage.setText(R.string.dialog_deactivate_auto_deposit);
 
@@ -208,10 +203,12 @@ public class ManageBankAccountActivity extends AppCompatActivity {
                 deactivateAutoDeposit();
             }
         });
-        btNo.setOnClickListener(new View.OnClickListener() {
+        btDialogCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.cancel();
+                newChecked = true;
+                checkAutoDeposit.setChecked(true);
             }
         });
 
@@ -311,7 +308,7 @@ public class ManageBankAccountActivity extends AppCompatActivity {
 
         txtMessage = (TextView) dialog.findViewById(R.id.customDialog_txtMessage);
         btYes = (Button) dialog.findViewById(R.id.customDialog_btYes);
-        btNo = (Button) dialog.findViewById(R.id.customDialog_btNo);
+        btDialogCancel = (Button) dialog.findViewById(R.id.customDialog_btDialogCancel);
 
         txtMessage.setText(R.string.dialog_confirm_changes);
 
@@ -322,7 +319,7 @@ public class ManageBankAccountActivity extends AppCompatActivity {
                 applyChanges(bankBalance, autoDepositValue, day);
             }
         });
-        btNo.setOnClickListener(new View.OnClickListener() {
+        btDialogCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.cancel();

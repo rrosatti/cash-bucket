@@ -1,6 +1,7 @@
 package com.example.rodri.cashbucket.activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -11,11 +12,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import com.example.rodri.cashbucket.R;
 import com.example.rodri.cashbucket.database.MyDataSource;
 import com.example.rodri.cashbucket.model.AutoDeposit;
 import com.example.rodri.cashbucket.model.Login;
+import com.example.rodri.cashbucket.util.Util;
 
 /**
  * Created by rodri on 1/20/2017.
@@ -33,6 +36,12 @@ public class ManageNotificationsActivity extends AppCompatActivity {
     private AutoDeposit autoDeposit;
     private boolean checked = false;
     private SharedPreferences sharedPreferences;
+    private Util util = new Util();
+
+    // Custom Dialog
+    private TextView txtMessage;
+    private Button btYes;
+    private Button btDialogCancel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,6 +105,8 @@ public class ManageNotificationsActivity extends AppCompatActivity {
     }
 
     private void showConfirmChangesDialog() {
+        // Old Dialog
+        /**
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.dialog_confirm_changes);
 
@@ -113,7 +124,34 @@ public class ManageNotificationsActivity extends AppCompatActivity {
             }
         });
 
-        builder.show();
+        builder.show();*/
+
+        // Custom Dialog
+        final Dialog dialog = util.createCustomDialog(this);
+
+        txtMessage = (TextView) dialog.findViewById(R.id.customDialog_txtMessage);
+        btYes = (Button) dialog.findViewById(R.id.customDialog_btYes);
+        btDialogCancel = (Button) dialog.findViewById(R.id.customDialog_btDialogCancel);
+
+        txtMessage.setText(R.string.dialog_confirm_changes);
+
+        btYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                applyChanges();
+            }
+        });
+        btDialogCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                checked = autoDeposit.isActive();
+                checkAutoDepositNotification.setChecked(checked);
+            }
+        });
+
+        dialog.show();
 
     }
 
