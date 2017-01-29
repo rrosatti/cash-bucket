@@ -22,21 +22,21 @@
     <string name="button_yes">Yes</string>
 
     <!-- Toast -->
-    <string name="toast_name_field_empty">The personal name field cannot be empty!</string>
-    <string name="toast_username_field_empty">The username field cannot be empty!</string>
-    <string name="toast_password_field_empty">The password field cannot be empty!</string>
-    <string name="toast_account_created_successfully">The account was created successfully!</string>
+    <string name="toast_name_field_empty">The <i>personal name</i> field cannot be empty!</string>
+    <string name="toast_username_field_empty">The <i>username</i> field cannot be empty!</string>
+    <string name="toast_password_field_empty">The <i>password</i> field cannot be empty!</string>
+    <string name="toast_account_created_successfully">Account created successfully!</string>
     <string name="toast_something_went_wrong">Sorry, something went wrong!</string>
-    <string name="toast_no_user_id">Something went wrong. There is no userId!!</string>
-    <string name="toast_balance_field_empty">The balance field cannot be empty!</string>
-    <string name="toast_value_field_empty">The value field cannot be empty!</string>
-    <string name="toast_day_field_empty">The day field cannot be empty!</string>
-    <string name="toast_bank_account_created_successfully">The bank account was created successfully!</string>
-    <string name="toast_login_failure">Username or password is invalid.</string>
+    <string name="toast_no_user_id">Something went wrong. There is no <i>userId</i>!!</string>
+    <string name="toast_balance_field_empty">The <i>balance</i> field cannot be empty!</string>
+    <string name="toast_value_field_empty">The <i>value</i> field cannot be empty!</string>
+    <string name="toast_day_field_empty">The <i>day</i> field cannot be empty!</string>
+    <string name="toast_bank_account_created_successfully">Bank Account created successfully!</string>
+    <string name="toast_login_failure"><i>username</i> or <i>password</i> is invalid.</string>
     <string name="toast_login_success">Welcome!</string>
     <string name="toast_date_field_empty">You have to set a date!</string>
     <string name="toast_wallet_value_empty">You must enter a value!</string>
-    <string name="toast_wallet_created_successfully">The wallet was created successfully</string>
+    <string name="toast_wallet_created_successfully">Wallet created successfully!</string>
     <string name="toast_no_changes_were_made">No changes were made.</string>
     <string name="toast_changes_successful">The changes were successful!</string>
     <string name="toast_refresh_page">The item was removed. Please, refresh the page!</string>

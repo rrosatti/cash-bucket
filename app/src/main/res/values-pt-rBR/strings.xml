@@ -1,0 +1,113 @@
+<resources>
+    <string name="app_name">CashBucket</string>
+
+    <!-- Hint -->
+    <string name="hint_username">usuário</string>
+    <string name="hint_password">senha</string>
+    <string name="hint_name">Nome</string>
+    <string name="hint_value">valor</string>
+    <string name="hint_balance">saldo</string>
+    <string name="hint_day">dia</string>
+    <string name="hint_desc">descrição</string>
+    <string name="hint_wallet_value">quantidade atual de dinheiro</string>
+
+    <!-- Button -->
+    <string name="button_signup">Criar Conta</string>
+    <string name="button_login">Entrar</string>
+    <string name="button_confirm">Confirmar</string>
+    <string name="button_calendar">Calendário</string>
+    <string name="button_cancel">Cancelar</string>
+    <string name="button_ok">OK</string>
+    <string name="button_no">Não</string>
+    <string name="button_yes">Sim</string>
+
+    <!-- Toast -->
+    <string name="toast_name_field_empty">O campo de <i>nome</i> não pode estar vazio!</string>
+    <string name="toast_username_field_empty">O campo <i>usuário</i> não pode estar vazio!</string>
+    <string name="toast_password_field_empty">O campo <i>senha</i> não pode estar vazio!</string>
+    <string name="toast_account_created_successfully">Conta criada com sucesso!</string>
+    <string name="toast_something_went_wrong">Desculpe, aconteceu algo de errado!</string>
+    <string name="toast_no_user_id">Algo de errado. userId não encontrado!!</string>
+    <string name="toast_balance_field_empty">O campo <i>saldo</i> não pode estar vazio!</string>
+    <string name="toast_value_field_empty">O campo <i>valor</i> não pode estar vazio!</string>
+    <string name="toast_day_field_empty">O campo <i>dia</i> não pode estar vazio!</string>
+    <string name="toast_bank_account_created_successfully">Conta bancária criada com sucesso!</string>
+    <string name="toast_login_failure"><i>usuário</i> ou <i>senha</i> incorretos.</string>
+    <string name="toast_login_success">Bem-vindo!</string>
+    <string name="toast_date_field_empty">É necessário escolher uma data!</string>
+    <string name="toast_wallet_value_empty">Você precisa digitar um valor!</string>
+    <string name="toast_wallet_created_successfully">Carteira criada com sucesso!</string>
+    <string name="toast_no_changes_were_made">Nenhuma mudança foi feita.</string>
+    <string name="toast_changes_successful">Alterações realizadas com sucesso!</string>
+    <string name="toast_refresh_page">O item foi removido. Por favor, atualize a página!</string>
+    <string name="toast_cash_movement_not_removed">Algo de errado. O item não foi removido.</string>
+
+    <!-- Cash Movement Type -->
+    <string-array name="list_cash_movement_types">
+        <item>Saque</item>
+        <item>Gasto Normal (Dinheiro)</item>
+        <item>Débito</item>
+        <item>Depósito</item>
+    </string-array>
+
+    <!-- Cash Movement Images -->
+    <array name="cash_movement_images">
+        <item>@drawable/withdrawal</item>
+        <item>@drawable/normal_expense</item>
+        <item>@drawable/debit</item>
+        <item>@drawable/deposit</item>
+    </array>
+
+    <!-- TextView -->
+    <string name="text_bank_account">Conta Bancária::</string>
+    <string name="text_wallet">Carteira: </string>
+    <string name="text_bank_account_title">Conta Bancária</string>
+    <string name="text_wallet_title">Carteira</string>
+    <string name="text_balance">Saldo</string>
+    <string name="text_day">Dia</string>
+    <string name="text_value">Valor</string>
+    <string name="text_account_title">Conta</string>
+    <string name="text_user_settings">Configurações de Usuário</string>
+
+    <!-- CheckBox -->
+    <string name="check_auto_deposit">Depósito-automático</string>
+    <string name="check_remember_me">Lembrar-me</string>
+    <string name="check_auto_login">Entrar Automaticamente</string>
+    <string name="check_auto_deposit_notification">Notificação para Depósito Automático</string>
+
+    <!-- Settings -->
+    <string-array name="settings_options">
+        <item>Preferências de Usuário</item>
+        <item>Configurações para Conta Bancária</item>
+        <item>Configurações para Carteira</item>
+        <item>Notificações</item>
+    </string-array>
+
+    <!-- Dialog -->
+    <string name="dialog_deactivate_auto_deposit">Desativar o Depósito Automático?</string>
+    <string name="dialog_negative_button">Cancelar</string>
+    <string name="dialog_confirm_changes">Aplicar alterações?</string>
+    <string name="dialog_delete_cash_movement">Remover item?</string>
+    <string name="dialog_yes">Sim</string>
+    <string name="dialog_no">Não</string>
+
+    <!-- Notification -->
+    <string name="notification_new_deposit">Novo Depósito</string>
+
+    <!-- Months -->
+    <string-array name="months">
+        <item>Janeiro</item>
+        <item>Fevereiro</item>
+        <item>Março</item>
+        <item>Abril</item>
+        <item>Maio</item>
+        <item>Junho</item>
+        <item>Julho</item>
+        <item>Agosto</item>
+        <item>Setembro</item>
+        <item>Outubro</item>
+        <item>Novembro</item>
+        <item>Dezembro</item>
+    </string-array>
+
+</resources>
