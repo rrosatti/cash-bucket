@@ -110,4 +110,10 @@
         <item>December</item>
     </string-array>
 
+    <!-- Statistics List -->
+    <string-array name="statistics_list">
+        <item>Chart</item>
+        <item>Monthly Report</item>
+    </string-array>
+
 </resources>

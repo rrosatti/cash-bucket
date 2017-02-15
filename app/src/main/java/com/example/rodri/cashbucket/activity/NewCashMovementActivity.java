@@ -150,19 +150,19 @@ public class NewCashMovementActivity extends AppCompatActivity {
                         if (id != 0) {
                             // change bank account or wallet
                             switch (selectedType) {
-                                case 1: {
+                                case 0: {
                                     dataSource.withdrawal(userId, value);
                                     break;
                                 }
-                                case 2: {
+                                case 1: {
                                     dataSource.normalExpense(userId, value);
                                     break;
                                 }
-                                case 3: {
+                                case 2: {
                                     dataSource.debit(userId, value);
                                     break;
                                 }
-                                case 4: {
+                                case 3: {
                                     dataSource.deposit(userId, value);
                                     break;
                                 }
