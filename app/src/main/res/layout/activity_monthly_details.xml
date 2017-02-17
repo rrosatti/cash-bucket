@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:padding="20dp">
+
+    <LinearLayout
+        android:id="@+id/activityMD_containerTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/activityMD_spinnerYears"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginEnd="15dp"/>
+
+        <Button
+            android:id="@+id/activityMD_btOK"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/button_ok"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/activityMD_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000"
+        android:layout_below="@id/activityMD_containerTop"
+        android:layout_marginTop="10dp"/>
+
+    <ExpandableListView
+        android:id="@+id/activityMD_listDetailedMonths"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/activityMD_divider"
+        android:layout_marginTop="20dp"
+        android:scrollbars="none" />
+
+</RelativeLayout>

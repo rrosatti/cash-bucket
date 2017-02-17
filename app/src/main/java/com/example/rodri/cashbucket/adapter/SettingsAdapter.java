@@ -36,7 +36,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.MyView
         public MyViewHolder(View v) {
             super(v);
 
-            displaySettingsOp = (TextView) v.findViewById(R.id.listItemSettings_txtSettingsOp);
+            displaySettingsOp = (TextView) v.findViewById(R.id.listSimpleItem_txtItem);
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,7 +77,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.MyView
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View viewItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_settings, parent, false);
+        View viewItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_simple_item, parent, false);
 
         return new MyViewHolder(viewItem);
     }
