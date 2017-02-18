@@ -48,4 +48,8 @@ public class DetailedMonth {
 
         return cashMovements;
     }
+
+    public int getNumOfCashMovements() {
+        return cashMovements.size();
+    }
 }
