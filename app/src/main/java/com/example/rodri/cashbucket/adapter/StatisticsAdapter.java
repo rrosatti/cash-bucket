@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.rodri.cashbucket.R;
+import com.example.rodri.cashbucket.activity.MonthlyDetailsActivity;
 import com.example.rodri.cashbucket.activity.StatisticsChartActivity;
 
 import java.util.List;
@@ -56,6 +57,8 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.My
                 break;
             }
             case 1: {
+                Intent i = new Intent(fragment.getActivity(), MonthlyDetailsActivity.class);
+                fragment.getActivity().startActivity(i);
                 break;
             }
         }

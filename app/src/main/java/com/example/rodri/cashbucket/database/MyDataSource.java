@@ -9,10 +9,12 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.rodri.cashbucket.model.AutoDeposit;
 import com.example.rodri.cashbucket.model.BankAccount;
 import com.example.rodri.cashbucket.model.CashMovement;
+import com.example.rodri.cashbucket.model.DetailedMonth;
 import com.example.rodri.cashbucket.model.User;
 import com.example.rodri.cashbucket.model.Wallet;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -509,6 +511,36 @@ public class MyDataSource {
         cursor.close();
 
         return cashMovements;
+    }
+
+    public LinkedHashMap<Integer, DetailedMonth> getDetailedMonths(long userId, int year) {
+        LinkedHashMap<Integer, DetailedMonth> dMonths = new LinkedHashMap<>();
+        Cursor cursor = db.query(MySQLiteHelper.TABLE_CASH_MOVEMENT, cashMovementColumns,
+                MySQLiteHelper.COLUMN_USER_ID + " = " + userId + " AND "
+                + MySQLiteHelper.COLUMN_YEAR + " = " + year, null, null, null, MySQLiteHelper.COLUMN_MONTH, null);
+
+        if (isCursorEmpty(cursor)) {
+            cursor.close();
+            return null;
+        }
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            int month = cursor.getInt(4);
+            if (dMonths.containsKey(month)) {
+                dMonths.get(month).addCashMovement(cursorToCashMovement(cursor));
+            } else {
+                DetailedMonth detailedMonth = new DetailedMonth(month, year);
+                detailedMonth.addCashMovement(cursorToCashMovement(cursor));
+                dMonths.put(month, detailedMonth);
+            }
+
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return dMonths;
+
     }
 
     /** ------------ UPDATE ---------------- */

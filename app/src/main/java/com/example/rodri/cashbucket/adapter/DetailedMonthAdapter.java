@@ -94,12 +94,12 @@ public class DetailedMonthAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return items.get(groupPosition).getNumOfCashMovements();
+        return items.get(groupPosition+1).getNumOfCashMovements();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return items.get(groupPosition);
+        return items.get(groupPosition+1);
     }
 
     @Override
