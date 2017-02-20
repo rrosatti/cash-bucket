@@ -30,6 +30,7 @@ public class DetailedMonthAdapter extends BaseExpandableListAdapter {
     private int[] groupPos;
     private Util util = new Util();
     private String[] months;
+    private String[] cashMovementTypes;
 
     public DetailedMonthAdapter(Activity activity, LinkedHashMap<Integer, DetailedMonth> items) {
         this.activity = activity;
@@ -40,13 +41,16 @@ public class DetailedMonthAdapter extends BaseExpandableListAdapter {
             groupPos[i++] = key;
         }
         months = activity.getResources().getStringArray(R.array.months);
+        cashMovementTypes = activity.getResources().getStringArray(R.array.list_cash_movement_types);
 
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public CashMovement getChild(int groupPosition, int childPosition) {
-        return items.get(groupPosition).getCashMovement(childPosition);
+        System.out.println("group pos: " + groupPosition + " childPos: " + childPosition);
+        System.out.println("GRoup: " + items.get(groupPosition+1));
+        return items.get(groupPosition+1).getCashMovement(childPosition);
     }
 
     @Override
@@ -78,14 +82,16 @@ public class DetailedMonthAdapter extends BaseExpandableListAdapter {
             holder = (ViewHolder) v.getTag();
         }
 
-        holder.txtType.setText(cashMovement.getType());
+        holder.txtType.setText(cashMovementTypes[cashMovement.getType()-1]);
         holder.txtValue.setText(util.formatMoneyString(cashMovement.getValue(), "R$"));
-        holder.txtDate.setText(cashMovement.getDay()+"/"+cashMovement.getMonth()+"/"+cashMovement.getYear());
+        String date = cashMovement.getDay()+"/"+cashMovement.getMonth()+"/"+cashMovement.getYear();
+        holder.txtDate.setText(date);
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(activity, "Testing: " + cashMovement.getType(), Toast.LENGTH_SHORT).show();
+                showCustomDialog(cashMovement);
             }
         });
 
@@ -140,5 +146,9 @@ public class DetailedMonthAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean hasStableIds() {
         return true;
+    }
+
+    private void showCustomDialog(CashMovement cashMovement) {
+
     }
 }

@@ -13,7 +13,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:layout_marginEnd="15dp"/>
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/custom_spinner_background"
+            android:spinnerMode="dropdown"/>
 
         <Button
             android:id="@+id/activityMD_btOK"
@@ -38,6 +40,16 @@
         android:layout_height="match_parent"
         android:layout_below="@id/activityMD_divider"
         android:layout_marginTop="20dp"
-        android:scrollbars="none" />
+        android:scrollbars="none"
+        android:groupIndicator="@drawable/group_indicator"/>
+
+    <ProgressBar
+        android:id="@+id/activityMD_progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        style="?attr/progressBarStyle"
+        android:indeterminateDrawable="@drawable/custom_progress_bar"/>
 
 </RelativeLayout>

@@ -100,6 +100,10 @@ public class MonthlyDetailsActivity extends AppCompatActivity {
             long userId = Login.getInstance().getUserId();
             temp = dataSource.getDetailedMonths(userId, year);
 
+            if (temp == null) {
+                temp = new LinkedHashMap<>();
+            }
+
             dataSource.close();
             return temp;
 
