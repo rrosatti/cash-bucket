@@ -193,7 +193,7 @@ public class ManageAccountActivity extends AppCompatActivity {
         builder.show();*/
 
         // custom Dialog
-        final Dialog dialog = util.createCustomDialog(this);
+        final Dialog dialog = util.createCustomDialog(this, R.layout.custom_dialog);
 
         txtMessage = (TextView) dialog.findViewById(R.id.customDialog_txtMessage);
         btYes = (Button) dialog.findViewById(R.id.customDialog_btYes);

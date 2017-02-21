@@ -148,7 +148,7 @@ public class ManageWalletActivity extends AppCompatActivity {
         builder.show();*/
 
         // Custom Dialog
-        final Dialog dialog = util.createCustomDialog(this);
+        final Dialog dialog = util.createCustomDialog(this, R.layout.custom_dialog);
 
         txtMessage = (TextView) dialog.findViewById(R.id.customDialog_txtMessage);
         btYes = (Button) dialog.findViewById(R.id.customDialog_btYes);

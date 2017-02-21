@@ -78,16 +78,7 @@ public class NewCashMovementActivity extends AppCompatActivity {
                         month = monthOfYear + 1;
                         year = _year;
 
-                        String sDay = String.valueOf(day);
-                        String sMonth = String.valueOf(month);
-                        String sYear = String.valueOf(year);
-                        if (month < 10) {
-                            sMonth = "0" + sMonth;
-                        }
-                        if (day < 10) {
-                            sDay = "0" + sDay;
-                        }
-                        date = sDay+"/"+sMonth+"/"+sYear;
+                        date = util.formatStringDate(day, month, year);
                         txtDate.setText(date);
                         //Toast.makeText(NewCashMovementActivity.this, date, Toast.LENGTH_SHORT).show();
                     }

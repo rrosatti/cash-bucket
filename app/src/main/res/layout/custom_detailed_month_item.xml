@@ -8,7 +8,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColor="#000"/>
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/customDMI_txtValue"
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textAlignment="center"
-        android:textColor="#000"/>
+        android:textColor="@color/colorAccent"/>
 
     <TextView
         android:id="@+id/customDMI_txtDate"
@@ -24,6 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textAlignment="textEnd"
-        android:textColor="#000"/>
+        android:textColor="@color/colorAccent"/>
 
 </LinearLayout>

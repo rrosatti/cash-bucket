@@ -1,6 +1,7 @@
 package com.example.rodri.cashbucket.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
@@ -38,6 +40,7 @@ public class MonthlyDetailsActivity extends AppCompatActivity {
     private DetailedMonthAdapter detailedMonthAdapter;
     private int selectedYear;
     private LinkedHashMap<Integer, DetailedMonth> detailedMonths;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,7 +69,9 @@ public class MonthlyDetailsActivity extends AppCompatActivity {
         btOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDetailedMonths(selectedYear);
+                //showDetailedMonths(selectedYear);
+                GetDataFromDatabase task = new GetDataFromDatabase();
+                task.execute("");
             }
         });
     }
@@ -75,6 +80,35 @@ public class MonthlyDetailsActivity extends AppCompatActivity {
         spinnerYears = (Spinner) findViewById(R.id.activityMD_spinnerYears);
         btOk = (Button) findViewById(R.id.activityMD_btOK);
         months = (ExpandableListView) findViewById(R.id.activityMD_listDetailedMonths);
+        progressBar = (ProgressBar) findViewById(R.id.activityMD_progressBar);
+    }
+
+    private class GetDataFromDatabase extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                Thread.sleep(1000);
+                detailedMonths = getDetailedMonths(selectedYear);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return "";
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressBar.setVisibility(View.GONE);
+            detailedMonthAdapter = new DetailedMonthAdapter(MonthlyDetailsActivity.this, detailedMonths);
+            months.setAdapter(detailedMonthAdapter);
+        }
     }
 
     private String[] generateYears(int range) {
@@ -87,9 +121,7 @@ public class MonthlyDetailsActivity extends AppCompatActivity {
     }
 
     private void showDetailedMonths(int year) {
-        detailedMonths = getDetailedMonths(year);
-        detailedMonthAdapter = new DetailedMonthAdapter(this, detailedMonths);
-        months.setAdapter(detailedMonthAdapter);
+
     }
 
     private LinkedHashMap<Integer, DetailedMonth> getDetailedMonths(int year) {

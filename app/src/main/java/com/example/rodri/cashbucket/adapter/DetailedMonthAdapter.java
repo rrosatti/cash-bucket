@@ -1,6 +1,7 @@
 package com.example.rodri.cashbucket.adapter;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -84,13 +85,12 @@ public class DetailedMonthAdapter extends BaseExpandableListAdapter {
 
         holder.txtType.setText(cashMovementTypes[cashMovement.getType()-1]);
         holder.txtValue.setText(util.formatMoneyString(cashMovement.getValue(), "R$"));
-        String date = cashMovement.getDay()+"/"+cashMovement.getMonth()+"/"+cashMovement.getYear();
+        String date = util.formatStringDate(cashMovement.getDay(), cashMovement.getMonth(), cashMovement.getYear());
         holder.txtDate.setText(date);
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(activity, "Testing: " + cashMovement.getType(), Toast.LENGTH_SHORT).show();
                 showCustomDialog(cashMovement);
             }
         });
@@ -149,6 +149,19 @@ public class DetailedMonthAdapter extends BaseExpandableListAdapter {
     }
 
     private void showCustomDialog(CashMovement cashMovement) {
+        Dialog dialog = util.createCustomDialog(activity, R.layout.custom_cash_movement_dialog);
 
+        TextView txtType = (TextView) dialog.findViewById(R.id.customCMD_txtType);
+        TextView txtValue = (TextView) dialog.findViewById(R.id.customCMD_txtValue);
+        TextView txtDate = (TextView) dialog.findViewById(R.id.customCMD_txtDate);
+        TextView txtDesc = (TextView) dialog.findViewById(R.id.customCMD_txtDesc);
+
+        txtType.setText(cashMovementTypes[cashMovement.getType()-1]);
+        txtValue.setText(util.formatMoneyString(cashMovement.getValue(), "R$"));
+        String date = util.formatStringDate(cashMovement.getDay(), cashMovement.getMonth(), cashMovement.getYear());
+        txtDate.setText(date);
+        txtDesc.setText(cashMovement.getDesc());
+
+        dialog.show();
     }
 }

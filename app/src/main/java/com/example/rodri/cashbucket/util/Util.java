@@ -89,12 +89,26 @@ public class Util {
         toast.show();
     }
 
-    public Dialog createCustomDialog(Activity activity) {
+    public Dialog createCustomDialog(Activity activity, int customLayoutId) {
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.custom_dialog);
+        dialog.setContentView(customLayoutId);
         dialog.setCancelable(true);
         return dialog;
+    }
+
+    public String formatStringDate(int day, int month, int year) {
+        String sDay = String.valueOf(day);
+        String sMonth = String.valueOf(month);
+        if (day < 10) {
+            sDay = "0" + day;
+        }
+        if (month < 10) {
+            sMonth = "0" + month;
+        }
+
+        String date = sDay+"/"+sMonth+"/"+year;
+        return date;
     }
 
 }

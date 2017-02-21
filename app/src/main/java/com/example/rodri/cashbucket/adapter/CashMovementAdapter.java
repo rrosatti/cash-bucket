@@ -79,21 +79,9 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
     public void onBindViewHolder(MyViewHolder holder, int position) {
         CashMovement cashMovement = cashMovements.get(position);
 
-        String sDay = String.valueOf(cashMovement.getDay());
-        String sMonth = String.valueOf(cashMovement.getMonth());
-        String sYear = String.valueOf(cashMovement.getYear());
-
         holder.cashMovementId = cashMovement.getId();
 
-        if (cashMovement.getDay() < 10) {
-            sDay = "0" + sDay;
-        }
-        if (cashMovement.getMonth() < 10) {
-            sMonth = "0" + sMonth;
-        }
-
-        String date = sDay+"/"+sMonth+"/"+sYear;
-
+        String date = util.formatStringDate(cashMovement.getDay(), cashMovement.getMonth(), cashMovement.getYear());
         String sValue = util.formatMoneyString(cashMovement.getValue(), "R$");
 
         holder.displayValue.setText(sValue);
@@ -135,7 +123,7 @@ public class CashMovementAdapter extends RecyclerView.Adapter<CashMovementAdapte
         builder.show();*/
 
         // custom dialog
-        final Dialog dialog = util.createCustomDialog(activity);
+        final Dialog dialog = util.createCustomDialog(activity, R.layout.custom_dialog);
 
         txtMessage = (TextView) dialog.findViewById(R.id.customDialog_txtMessage);
         btYes = (Button) dialog.findViewById(R.id.customDialog_btYes);

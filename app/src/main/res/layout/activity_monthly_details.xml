@@ -22,7 +22,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/button_ok"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/custom_button_states"
+            android:textColor="@drawable/button_text_color"/>
 
     </LinearLayout>
 
@@ -33,6 +35,7 @@
         android:background="#000"
         android:layout_below="@id/activityMD_containerTop"
         android:layout_marginTop="10dp"/>
+
 
     <ExpandableListView
         android:id="@+id/activityMD_listDetailedMonths"
