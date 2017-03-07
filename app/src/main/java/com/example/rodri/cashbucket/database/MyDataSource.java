@@ -395,10 +395,18 @@ public class MyDataSource {
 
     }
 
-    public List<CashMovement> getAllCashMovements(long userId) {
+    public List<CashMovement> getAllCashMovements(long userId, boolean orderBy) {
         List<CashMovement> cashMovements = new ArrayList<>();
+
+        String sOrderBy = null;
+        if (orderBy) {
+            sOrderBy = MySQLiteHelper.COLUMN_YEAR + " DESC, " +
+                    MySQLiteHelper.COLUMN_MONTH + " DESC, " +
+                    MySQLiteHelper.COLUMN_DAY + " DESC";
+        }
+
         Cursor cursor = db.query(MySQLiteHelper.TABLE_CASH_MOVEMENT, cashMovementColumns,
-                MySQLiteHelper.COLUMN_USER_ID + " = " + userId, null, null, null, null, null);
+                MySQLiteHelper.COLUMN_USER_ID + " = " + userId, null, null, null, sOrderBy, null);
 
         if (isCursorEmpty(cursor)) {
             System.out.println("getAllCashMovements()");

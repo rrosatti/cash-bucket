@@ -13,7 +13,7 @@
             android:id="@+id/customCMD_txtType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
+            android:textColor="#000"
             android:textSize="16sp"
             android:layout_weight="1"/>
 
@@ -21,7 +21,7 @@
             android:id="@+id/customCMD_txtValue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
+            android:textColor="#000"
             android:textAlignment="textEnd"
             android:textSize="16sp"
             android:layout_weight="1"/>
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:layout_below="@+id/customCMD_container1"
-        android:textColor="@color/colorAccent"
+        android:textColor="#000"
         android:textSize="16sp"
         android:layout_marginTop="5dp"/>
 

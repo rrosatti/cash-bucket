@@ -114,7 +114,7 @@ public class CashFlowFragment extends Fragment {
 
             long userId = Login.getInstance().getUserId();
 
-            cashMovements = dataSource.getAllCashMovements(userId);
+            cashMovements = dataSource.getAllCashMovements(userId, true);
             bankAccount = dataSource.getBankAccount(userId);
             wallet = dataSource.getWallet(userId);
 

@@ -10,6 +10,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/colorAccent"
-        android:layout_marginStart="5dp"/>
+        android:layout_marginStart="5dp"
+        android:padding="10dp"/>
 
 </LinearLayout>
